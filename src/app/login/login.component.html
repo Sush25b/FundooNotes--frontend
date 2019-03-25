@@ -1,0 +1,49 @@
+<div class="bg">
+    <!-- div for form-->
+    <form [formGroup]="loginForm">
+
+        <div fxLayout="column" fxLayoutAlign="center center" class="flex-container">
+            <mat-card class="matpad">
+                <h2 style="font-size:150%; text-align:center; color: rgb(49, 100, 177)"> fundooNotes!</h2>
+                <h3 class="h3">Login</h3>
+
+                <div>
+                    <!-- for email-->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="email" formControlName="emailid">
+                        <mat-error *ngIf="emailid.invalid">{{getErrorMessageUsername()}}</mat-error>
+                        <mat-hint></mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <!-- for pasword-->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input type="password" matInput placeholder="password" formControlName="password">
+                        <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+                        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-hint></mat-hint>
+                    </mat-form-field><br>
+                </div>
+                <div>
+                    <!-- for Next button-->
+                    <!-- <button mat-button>Next</button> -->
+                    <nav>
+                        <a class="button" (click)="onLogin()">Login</a>
+                    </nav>
+                </div>
+                <div>
+                    <!-- for href (routing )-->
+                    <nav>
+                        <a routerLink="/forgetpassword"><br>forget password?</a>
+                    </nav>
+                    <!-- <a href="" style="color:rgb(61, 61, 182);font-size:80%;" ><br>forget password?</a> -->
+                </div>
+
+
+            </mat-card>
+        </div>
+    </form>
+</div> <div fxLayout="column" fxLayoutAlign="center center" class="flex-container"></div>

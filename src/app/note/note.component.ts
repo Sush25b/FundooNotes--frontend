@@ -1,0 +1,110 @@
+import { Component, OnInit } from '@angular/core';
+import { FLAGS } from '@angular/core/src/render3/interfaces/view';
+import { HttpService } from '../service/http.service';
+import { MatSnackBar} from '@angular/material';
+import { CreateNoteModel } from '../model/create-note.model';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { decode } from 'punycode';
+import { Response } from 'selenium-webdriver/http';
+
+@Component({
+  selector: 'app-note',
+  templateUrl: './note.component.html',
+  styleUrls: ['./note.component.scss']
+})
+
+export class NoteComponent implements OnInit 
+{
+
+  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
+
+  // data:any;
+  userNote:any;
+  noteId:any;
+  data:any;
+  
+
+  ngOnInit() 
+  {
+    this.getNotes();
+    // this.http.getRequest("/note/getAll").subscribe((data)=> console.log(data))
+  }
+
+  loadNotes()
+  {
+    const token= localStorage.getItem('token');
+
+    if(token===null)
+    {
+      this.router.navigateByUrl('/test');
+    }
+    else
+    {
+      const t = decode(token);
+      // const id = t.userId;
+    }
+  }
+
+  getNotes()
+  {
+    this.http.getRequest("/note/getAll").subscribe(
+
+      (response)=> {
+         console.log("sucessfully get notes",response),
+       // this.data= response('body'),
+        //console.log("data-->",this.data)
+        this.userNote =response;
+
+      // if(response.body.status===402)
+      // {
+      //   this.snackbar.open(response.body.Message,'Undo',{duration:1000})
+      // }
+
+       },
+
+       (error)=> {
+            console.log("error",error);            
+       } 
+    )
+  }
+
+  onPin(noteId):any
+  {
+    console.log(noteId);
+    
+    //this.http.postReq("/note/ispinned?noteId="+noteId).subscribe(
+     //this.http.postRequestT("/note/ispinned/noteId="+noteId,this.data).subscribe(
+       this.http.postRequestT("/note/ispinned",noteId).subscribe(  
+      data=> {
+        console.log(data);
+        this.snackbar.open(data.Message,'Undo',{duration:1000})
+      });
+  }
+
+  onArchive(noteId):any
+  {
+    console.log(noteId);
+   
+    //this.http.postReq("/note/ispinned?noteId="+noteId).subscribe(
+      //this.http.postRequestT("/note/ispinned/noteId="+noteId,this.data).subscribe(
+      this.http.postRequestT("/note/isarchieve",noteId).subscribe(  
+       data=> {
+         console.log(data);
+         this.snackbar.open(data.Message,'Undo',{duration:1000})
+       });
+  }
+
+  onTrash(noteId):any
+  {
+    console.log(noteId);
+   
+    //this.http.postReq("/note/ispinned?noteId="+noteId).subscribe(
+      //this.http.postRequestT("/note/ispinned/noteId="+noteId,this.data).subscribe(
+      this.http.postRequestT("/note/trash",noteId).subscribe(  
+       data=> {
+         console.log(data);
+         this.snackbar.open(data.Message,'Undo',{duration:1000})
+       });
+  }
+}
