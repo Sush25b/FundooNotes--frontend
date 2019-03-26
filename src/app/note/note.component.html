@@ -17,12 +17,18 @@
                     <div>
                       <div>
                           <input [(ngModel)]= "note.title">
+<<<<<<< HEAD
+                          <mat-icon style="font-size: 18px !important" (click)="onPin();">pin_drop</mat-icon>
+                      </div ><br>
+                      <div>
+=======
                           <button mat-icon-button matTooltip="Pin" routerLink="/dashboard">
                                <mat-icon style="margin-left: 15px; font-size: 18px !important" (click)="onPin(note.noteId);">pin_drop</mat-icon>
                           </button>
                       
                       </div ><br>
                       <div >
+>>>>>>> update
                           <input [(ngModel)]= "note.description">
                       <div>     
                     </div>
@@ -55,6 +61,7 @@
 
                         <div >
                           <button mat-icon-button matTooltip="Archive" routerLink="/dashboard">
+                                <!-- <mat-icon style="font-size: 17px !important">archive</mat-icon> -->
                             <mat-icon style="font-size: 17px !important" (click)="onArchive(note.noteId);">archive</mat-icon>
                           </button>
                         </div>
@@ -88,8 +95,9 @@
           </mat-menu>
 
           <mat-menu #MoreOption="matMenu">
+              <!-- <button mat-menu-item style="height: 35px;">Delete note</button> -->
               <button mat-menu-item style="height: 35px;" (click)="onTrash(note.noteId);">Delete note</button>
-              <button mat-menu-item style="height: 35px;">Add label</button>
+              <!-- <button mat-menu-item style="height: 35px;">Add label</button> -->
               <button mat-menu-item style="height: 35px;">Add drawing</button>
               <button mat-menu-item style="height: 35px;">Make a copy</button>
               <button mat-menu-item style="height: 35px;">Show Checkboxes</button>

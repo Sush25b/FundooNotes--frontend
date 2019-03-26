@@ -60,6 +60,4 @@ export class AddNoteComponent implements OnInit {
       this.snackbar.open(data.Message,'Undo',{duration:1000})
     });
   }
-
-  
 }

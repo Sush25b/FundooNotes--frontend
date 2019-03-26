@@ -15,7 +15,11 @@ export class HttpService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
+<<<<<<< HEAD
+  // post request                                                                               
+=======
   //login                                                                               
+>>>>>>> update
   public postRequest(url, data): Observable<any>
   {
     console.log("8888888888888888888888888");
@@ -26,6 +30,14 @@ export class HttpService {
     return this.http.post(this.baseUrl + url, data);
   }
 
+<<<<<<< HEAD
+  public postRequestT(url,data): Observable<any>
+  {
+    console.log("1111111111111111111"+localStorage.getItem('token'));
+    //,observe:'response'
+    return this.http.post(this.baseUrl + url,data,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
+    )
+=======
   //get all notes
   public postReq(url): Observable<any>
   {
@@ -45,6 +57,7 @@ export class HttpService {
     return this.http.post(this.baseUrl + url,data,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
     )
    
+>>>>>>> update
   }
 
   public putRequest(url):Observable<any>
