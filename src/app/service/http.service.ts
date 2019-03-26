@@ -15,11 +15,11 @@ export class HttpService {
   baseUrl = environment.baseUrl;
   constructor(private http: HttpClient) { }
 
-<<<<<<< HEAD
+  a:any;
+  b:any;
   // post request                                                                               
-=======
+
   //login                                                                               
->>>>>>> update
   public postRequest(url, data): Observable<any>
   {
     console.log("8888888888888888888888888");
@@ -30,21 +30,20 @@ export class HttpService {
     return this.http.post(this.baseUrl + url, data);
   }
 
-<<<<<<< HEAD
-  public postRequestT(url,data): Observable<any>
-  {
-    console.log("1111111111111111111"+localStorage.getItem('token'));
-    //,observe:'response'
-    return this.http.post(this.baseUrl + url,data,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
-    )
-=======
+
+  // public postRequestT(url,data): Observable<any>
+  // {
+  //   console.log("1111111111111111111"+localStorage.getItem('token'));
+  //   //,observe:'response'
+  //   return this.http.post(this.baseUrl + url,data,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
+  //   )
+
   //get all notes
-  public postReq(url): Observable<any>
+  public putReq(url): Observable<any>
   {
     console.log(url+"  **ssdsd**  "+localStorage.getItem('token'));
-    //,observe:'response'
-    console.log(localStorage.getItem('token'));
-    return this.http.post(this.baseUrl + url,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
+
+    return this.http.put(this.baseUrl + url,"",{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
     )
   }
 
@@ -56,8 +55,6 @@ export class HttpService {
 
     return this.http.post(this.baseUrl + url,data,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
     )
-   
->>>>>>> update
   }
 
   public putRequest(url):Observable<any>
@@ -67,8 +64,6 @@ export class HttpService {
   
   public getRequest(url): Observable<any>
    {
-    const header = new HttpHeaders({'token': localStorage.getItem('token') })
-
     return this.http.get(environment.baseUrl + url,{ headers: new HttpHeaders().set("jwtToken", localStorage.getItem('token')) }
       );
    }

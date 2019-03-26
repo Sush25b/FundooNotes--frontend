@@ -23,7 +23,7 @@ export class NoteComponent implements OnInit
   userNote:any;
   noteId:any;
   data:any;
-  
+
 
   ngOnInit() 
   {
@@ -48,7 +48,7 @@ export class NoteComponent implements OnInit
 
   getNotes()
   {
-    this.http.getRequest("/note/getAll").subscribe(
+    this.http.getRequest("/note/getAlls"+"?trash=false&archive=false").subscribe(
 
       (response)=> {
          console.log("sucessfully get notes",response),
@@ -60,9 +60,7 @@ export class NoteComponent implements OnInit
       // {
       //   this.snackbar.open(response.body.Message,'Undo',{duration:1000})
       // }
-
        },
-
        (error)=> {
             console.log("error",error);            
        } 
@@ -73,9 +71,9 @@ export class NoteComponent implements OnInit
   {
     console.log(noteId);
     
-    //this.http.postReq("/note/ispinned?noteId="+noteId).subscribe(
+    this.http.putReq("/note/ispinned?noteId="+noteId).subscribe(
      //this.http.postRequestT("/note/ispinned/noteId="+noteId,this.data).subscribe(
-       this.http.postRequestT("/note/ispinned",noteId).subscribe(  
+      // this.http.postRequestT("/note/ispinned",noteId).subscribe(  
       data=> {
         console.log(data);
         this.snackbar.open(data.Message,'Undo',{duration:1000})
@@ -86,9 +84,7 @@ export class NoteComponent implements OnInit
   {
     console.log(noteId);
    
-    //this.http.postReq("/note/ispinned?noteId="+noteId).subscribe(
-      //this.http.postRequestT("/note/ispinned/noteId="+noteId,this.data).subscribe(
-      this.http.postRequestT("/note/isarchieve",noteId).subscribe(  
+      this.http.putReq("/note/isarchieve?noteId="+noteId).subscribe(  
        data=> {
          console.log(data);
          this.snackbar.open(data.Message,'Undo',{duration:1000})
@@ -98,10 +94,8 @@ export class NoteComponent implements OnInit
   onTrash(noteId):any
   {
     console.log(noteId);
-   
-    //this.http.postReq("/note/ispinned?noteId="+noteId).subscribe(
-      //this.http.postRequestT("/note/ispinned/noteId="+noteId,this.data).subscribe(
-      this.http.postRequestT("/note/trash",noteId).subscribe(  
+
+      this.http.putReq("/note/trash?noteId="+noteId).subscribe(  
        data=> {
          console.log(data);
          this.snackbar.open(data.Message,'Undo',{duration:1000})
