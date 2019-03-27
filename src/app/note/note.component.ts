@@ -23,7 +23,7 @@ export class NoteComponent implements OnInit
   userNote:any;
   noteId:any;
   data:any;
-
+  
 
   ngOnInit() 
   {

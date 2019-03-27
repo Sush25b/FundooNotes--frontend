@@ -20,15 +20,16 @@
 </div>
 
 <div>
-    <form [formGroup]="addnoteForm">
+    <!-- <form [formGroup]="addnoteForm"> -->
 
-          <mat-card *ngIf="flag===true" class="matpad2">
+          <mat-card *ngIf="flag===true" class="matpad2" [ngStyle]="{ 'background-color': colors}"  >
             <div>
               <!-- <input class="titlebar" matInput placeholder="take a note..."> -->
 
               <!-- pin_drop -->
               <div>
-                <input class="titlebar"  matTextareaAutosize  formControlName="title"  matInput placeholder="Title">
+
+                <input class="titlebar"  matTextareaAutosize  [(ngModel)]="Note.title"  matInput placeholder="Title">
                     <!-- mat icon button====> pin symbol-->
                     <button mat-icon-button matTooltip="Pin" routerLink="/dashboard" style="padding-left: 38px;" >
                       <mat-icon style="font-size: 18px !important" >pin_drop</mat-icon>
@@ -36,7 +37,7 @@
               </div><br>
 
               <div>
-                <input class="titlebar" matTextareaAutosize formControlName="description"  matInput placeholder="Take a note...">
+                <input class="titlebar" matTextareaAutosize [(ngModel)]="Note.description"  matInput placeholder="Take a note...">
               </div>
 
               <div>
@@ -74,7 +75,7 @@
                 </div>
 
                 <div >
-                  <button mat-icon-button matTooltip="Change Color" [matMenuTriggerFor]="buttonMenu" routerLink="/dashboard">
+                  <button mat-icon-button matTooltip="Change Color" [matMenuTriggerFor]="buttonMenu"  routerLink="/dashboard">
                     <mat-icon style="font-size: 17px !important">color_lens</mat-icon>
                   </button>
                 </div>
@@ -140,7 +141,7 @@
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-             </button>
+              </button>
           </mat-menu>
 
           <mat-menu [overlapTrigger]="false" #buttonMenu="matMenu">
@@ -160,6 +161,6 @@
             <button matTooltip="Purple" (click)="setColorToTitle('#d7aefb ')" mat-mini-fab class="colorlens" style="background-color:#d7aefb "></button>
           </mat-menu>
 
-    </form>
+    <!-- </form> -->
 
 </div>

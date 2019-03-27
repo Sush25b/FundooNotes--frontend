@@ -12,7 +12,7 @@
   <!-- these below div line===>is just a for loop, will not effect the flex-->
   <div *ngFor= "let note of userNote" > 
       <div style="  margin-top: 30px; margin-bottom: 30px;">
-        <mat-card class="matpad2">
+        <mat-card class="matpad2" [ngStyle]="{ 'background-color': note.color}">
               <div>
                     <div>
                       <div>
