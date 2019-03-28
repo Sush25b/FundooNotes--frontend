@@ -17,6 +17,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { NoteComponent } from './note/note.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { ArchiveComponent } from './archive/archive.component';
+import { DialogboxComponent } from './dialogbox/dialogbox.component';
+import { BinComponent } from './bin/bin.component';
+import { GetnoteComponent } from './getnote/getnote.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     DashboardComponent,
     AddNoteComponent,
     NoteComponent,
+    ArchiveComponent,
+    DialogboxComponent,
+    BinComponent,
+    GetnoteComponent,
     
   ],
   imports: [

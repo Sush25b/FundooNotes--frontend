@@ -8,6 +8,9 @@ import { TestComponent } from './test/test.component'
 import { DashboardComponent} from './dashboard/dashboard.component';
 import { AddNoteComponent} from './add-note/add-note.component';
 import { NoteComponent } from './note/note.component';
+import { ArchiveComponent } from './archive/archive.component';
+import { BinComponent } from './bin/bin.component';
+import { GetnoteComponent } from './getnote/getnote.component';
 
 // routing components--> add here Only
 const routes: Routes = [
@@ -19,9 +22,9 @@ const routes: Routes = [
   {path: 'test',component:TestComponent},
   {path: 'dashboard',component:DashboardComponent,
         children:[
-                  {path:'archive',component:NoteComponent},
-                  {path:'bin',component:DashboardComponent},
-                  {path:'getnotes',component:DashboardComponent}]
+                  {path:'archive',component:ArchiveComponent},
+                  {path:'bin',component:BinComponent},
+                  {path:'',component:GetnoteComponent}]
   },
   {path: 'addnote',component:AddNoteComponent}
 ];

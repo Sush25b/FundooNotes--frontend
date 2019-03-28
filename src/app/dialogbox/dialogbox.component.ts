@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { HttpService } from '../service/http.service';
 import { MatSnackBar} from '@angular/material';
 import { CreateNoteModel } from '../model/create-note.model';
@@ -7,25 +7,22 @@ import { Router } from '@angular/router';
 import { decode } from 'punycode';
 import { Response } from 'selenium-webdriver/http';
 
+
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-dialogbox',
+  templateUrl: './dialogbox.component.html',
+  styleUrls: ['./dialogbox.component.scss']
 })
-export class DashboardComponent implements OnInit 
-{
+export class DialogboxComponent implements OnInit {
+
+  @Input()
+  Note:any;
+
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
-  // data:any;
-  userNote:any;
-  noteId:any;
-  data:any;
-  
-
-  ngOnInit() 
-  {
-    // this.getNotes();
-    // this.http.getRequest("/note/getAll").subscribe((data)=> console.log(data))
+  ngOnInit() {
+    console.log(this.Note);
+    // this.data=this.Note;
   }
 
   loadNotes()
@@ -42,27 +39,6 @@ export class DashboardComponent implements OnInit
       // const id = t.userId;
     }
   }
-
-  // getNotes()
-  // {
-  //   this.http.getRequest("/note/getAlls"+"?trash=false&archive=false").subscribe(
-
-  //     (response)=> {
-  //        console.log("sucessfully get notes",response),
-  //      // this.data= response('body'),
-  //       //console.log("data-->",this.data)
-  //       this.userNote =response;
-
-  //     // if(response.body.status===402)
-  //     // {
-  //     //   this.snackbar.open(response.body.Message,'Undo',{duration:1000})
-  //     // }
-  //      },
-  //      (error)=> {
-  //           console.log("error",error);            
-  //      } 
-  //   )
-  // }
 
   onPin(noteId):any
   {
@@ -98,5 +74,6 @@ export class DashboardComponent implements OnInit
          this.snackbar.open(data.Message,'Undo',{duration:1000})
        });
   }
-  
+
+
 }

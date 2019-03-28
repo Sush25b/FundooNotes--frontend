@@ -73,8 +73,7 @@
           <mat-sidenav-container class="example-container" class="bg" autosize>
 
                 <!-- side bar *** Use <mat-sidenav-content> below one-->
-                <mat-sidenav #sidenav mode="side" mode="side" [(opened)]="opened"
-                  (opened)="events.push('open!')" (closed)="events.push('close!')">
+                <mat-sidenav #sidenav mode="side" mode="side" [(opened)]="opened">
 
                               <!-- <mat-button-toggle class="MB2">hiiiiiii</mat-button-toggle>
                                   <br> -->
@@ -92,11 +91,11 @@
                     <mat-icon class="spacebetween">edit</mat-icon>Edit Label
                   </mat-button-toggle><br>
 
-                  <mat-button-toggle class="MB5">
+                  <mat-button-toggle class="MB5" routerLink="archive">
                     <mat-icon class="spacebetween" > archive</mat-icon>Archive
                   </mat-button-toggle><br>
 
-                  <mat-button-toggle class="MB6">
+                  <mat-button-toggle class="MB6" routerLink="bin">
                     <mat-icon class="spacebetween"> delete</mat-icon>Bin
                   </mat-button-toggle><br>
 
@@ -115,7 +114,8 @@
                   </div>
                   <div>
                       <p>hiiiiiii</p>
-                    <app-note></app-note>
+                    <!-- <app-note></app-note> -->
+                    <!-- <app-dialogbox></app-dialogbox> -->
                      <router-outlet></router-outlet>
  
                   </div>
