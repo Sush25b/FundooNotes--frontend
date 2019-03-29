@@ -41,6 +41,12 @@
               </div>
 
               <div>
+                <mat-chip-list>
+                  <mat-chip  *ngIf = "timer"><mat-icon style = "margin-right: 10px;margin-left: -9px;">timer</mat-icon>{{currentDateAndTime}}</mat-chip>
+              </mat-chip-list>
+              </div>
+              
+              <div>
                 <!-- <input class="titlebar" matTextareaAutosize formControlName="description"  matInput placeholder="Take a note..."> -->
                 <!-- <mat-form-field class="example-full-width">
                   <input class="titlebar" matTextareaAutosize formControlName="datetime" >

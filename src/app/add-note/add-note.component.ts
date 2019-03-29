@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { NoteComponent } from '../note/note.component';
+// import * as moment from 'moment';
 
 // 
 // 
@@ -25,6 +26,9 @@ export class AddNoteComponent implements OnInit {
   colors:String;
   title:any;
   description:any;
+  // fulldate:string;
+  // currentDateAndTime:String
+
   // model:any ={};
   // title = new FormControl('')
   // description = new FormControl('')
@@ -86,5 +90,35 @@ export class AddNoteComponent implements OnInit {
     this.colors=color;
     this.Note.color=color;
   }
+
+  // today(id) {
+  //   var day = new Date();
+  //   this.fulldate = day.toDateString();
+  //   let currentDate = moment(this.fulldate).format("DD/MM/YYYY");
+  //   this.currentDateAndTime = currentDate + " " + " 08:00 PM";
+  //   this.timer = true;
+    
+  // }
+
+  // tomorrow(id) {
+  //   debugger;
+  //   var day = new Date();
+  //   day.setDate(day.getDate() + 1);
+  //   this.fulldate = day.toDateString();
+  //   let currentDate = moment(this.fulldate).format("DD/MM/YYYY");
+  //   this.currentDateAndTime = currentDate + " " + " 08:00 AM";
+  //   this.timer = true;
+  // }
+
+  // nextWeek(id) {
+  //   debugger;
+  //   var day = new Date();
+
+  //   this.fulldate = day.setDate(day.getDate() + ((1 + 7 - day.getDay()) % 7));
+  //   let currentDate = moment(this.fulldate).format("DD/MM/YYYY");
+  //   this.currentDateAndTime = currentDate + " " + " 08:00 PM";
+  //   this.timer = true;
+  // }
+
 
 }

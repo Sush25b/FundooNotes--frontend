@@ -21,6 +21,7 @@ import { ArchiveComponent } from './archive/archive.component';
 import { DialogboxComponent } from './dialogbox/dialogbox.component';
 import { BinComponent } from './bin/bin.component';
 import { GetnoteComponent } from './getnote/getnote.component';
+import { EditnoteComponent } from './editnote/editnote.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,8 @@ import { GetnoteComponent } from './getnote/getnote.component';
     DialogboxComponent,
     BinComponent,
     GetnoteComponent,
+    EditnoteComponent,
+
     
   ],
   imports: [
@@ -58,6 +61,7 @@ import { GetnoteComponent } from './getnote/getnote.component';
    // HttpClient
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[EditnoteComponent]
 })
 export class AppModule { }

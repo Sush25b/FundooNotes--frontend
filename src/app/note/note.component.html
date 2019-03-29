@@ -15,8 +15,10 @@
         <mat-card class="matpad2" [ngStyle]="{ 'background-color': note.color}">
               <div>
                     <div>
-                      <div>
-                          <input [(ngModel)]= "note.title">
+                      <!-- <div (click) = "openDilog(note)"> -->
+                        <div>
+                          <!-- <input matTextareaAutosize [(ngModel)]= "note.title"> -->
+                          <textarea style="border-width: inherit;" matTextareaAutosize [(ngModel)]= "note.title"></textarea>
                           <!-- <mat-icon style="font-size: 18px !important" (click)="onPin();">pin_drop</mat-icon>
                       </div ><br>
                       <div> -->
@@ -27,7 +29,8 @@
                       
                       </div ><br>
                       <div >
-                          <input [(ngModel)]= "note.description">
+                          <!-- <input matTextareaAutosize [(ngModel)]= "note.description"> -->
+                          <textarea style="border-width: inherit;" matTextareaAutosize [(ngModel)]= "note.description"></textarea>
                       <div>     
                     </div>
 

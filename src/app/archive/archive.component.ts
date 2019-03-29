@@ -35,7 +35,7 @@ export class ArchiveComponent implements OnInit {
        // this.data= response('body'),
         //console.log("data-->",this.data)
         this.userNote =response;
-
+        console.log("userNote",this.userNote);
       // if(response.body.status===402)
       // {
       //   this.snackbar.open(response.body.Message,'Undo',{duration:1000})
