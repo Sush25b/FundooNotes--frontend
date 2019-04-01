@@ -7,12 +7,17 @@ import {MAT_DIALOG_DATA} from '@angular/material';
 })
 export class EditnoteComponent implements OnInit {
 //note:any
-  constructor(
-@Inject(MAT_DIALOG_DATA) private data:{noteData:any},
+
+  constructor
+  (
+      @Inject(MAT_DIALOG_DATA) private data:{noteData:any}
   ) { }
-note = this.data.noteData
-  ngOnInit() {
-  }
+
+  note = this.data.noteData
+  
+  ngOnInit( ) {console.log(this.data.noteData)}
+
+
 update()
 {
   console.log(this.note)

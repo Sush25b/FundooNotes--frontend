@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { decode } from 'punycode';
 import { Response } from 'selenium-webdriver/http';
+import {MatDialog,MatDialogConfig} from '@angular/material';
+import { from } from 'rxjs';
+import {EditnoteComponent} from 'src/app/editnote/editnote.component';
 
 @Component({
   selector: 'app-getnote',
@@ -13,7 +16,7 @@ import { Response } from 'selenium-webdriver/http';
 })
 export class GetnoteComponent implements OnInit {
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
+  constructor(private dialog :MatDialog,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
     // data:any;
     userNote:any;
@@ -24,6 +27,22 @@ export class GetnoteComponent implements OnInit {
   ngOnInit()
    {    this.getAllNotes();
   }
+
+//   openDilog(note:any)
+//   {
+//   const dialogConfig = new  MatDialogConfig();
+//   dialogConfig.data = {
+//                            noteData:note,
+//                       }
+//   dialogConfig.disableClose = false;
+//   dialogConfig.autoFocus = true;
+//   // dialogConfig.width = '600px';
+//   // dialogConfig.height = '200px';
+//   // dialogConfig.direction= 'ltr';
+//   this.dialog.open(EditnoteComponent,dialogConfig)
+//   console.log(dialogConfig.data)
+//  }
+
 
   getAllNotes()
   {

@@ -17,8 +17,11 @@ import {EditnoteComponent} from 'src/app/editnote/editnote.component';
 })
 export class DialogboxComponent implements OnInit {
 
+  noteData:any;
+
   @Input()
   Note:any;
+
 
   constructor(private dialog :MatDialog,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
@@ -30,6 +33,9 @@ export class DialogboxComponent implements OnInit {
   openDilog(note:any)
   {
     const dialogConfig = new  MatDialogConfig();
+    console.log(note)
+
+
     dialogConfig.data = {
                              noteData:note,
                         }
@@ -39,7 +45,7 @@ export class DialogboxComponent implements OnInit {
     // dialogConfig.height = '200px';
     // dialogConfig.direction= 'ltr';
     this.dialog.open(EditnoteComponent,dialogConfig)
-    console.log(dialogConfig.data)
+    console.log(dialogConfig.data.noteData)
   }
 
   loadNotes()

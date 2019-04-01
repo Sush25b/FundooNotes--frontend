@@ -10,6 +10,7 @@ import { Response } from 'selenium-webdriver/http';
 import {MatDialog,MatDialogConfig} from '@angular/material';
 import { from } from 'rxjs';
 import {EditnoteComponent} from 'src/app/editnote/editnote.component';
+
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
