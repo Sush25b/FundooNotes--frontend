@@ -20,13 +20,15 @@ export class DashboardComponent implements OnInit
   userNote:any;
   noteId:any;
   data:any;
+  textchange="fundooNotes!";
   
-
   ngOnInit() 
   {
+    
     // this.getNotes();
     // this.http.getRequest("/note/getAll").subscribe((data)=> console.log(data))
   }
+  
 
   loadNotes()
   {
@@ -64,8 +66,15 @@ export class DashboardComponent implements OnInit
   //   )
   // }
 
+
+  onNotes()
+  {
+    this.textchange="fundooNotes!";
+  }
+
   onPin(noteId):any
   {
+
     console.log(noteId);
     
     this.http.putReq("/note/ispinned?noteId="+noteId).subscribe(
@@ -77,26 +86,28 @@ export class DashboardComponent implements OnInit
       });
   }
 
-  onArchive(noteId):any
+  onArchive()
   {
-    console.log(noteId);
+    this.textchange="Archive";
+    // console.log(noteId);
    
-      this.http.putReq("/note/isarchieve?noteId="+noteId).subscribe(  
-       data=> {
-         console.log(data);
-         this.snackbar.open(data.Message,'Undo',{duration:1000})
-       });
+    //   this.http.putReq("/note/isarchieve?noteId="+noteId).subscribe(  
+    //    data=> {
+    //      console.log(data);
+    //      this.snackbar.open(data.Message,'Undo',{duration:1000})
+    //    });
   }
 
-  onTrash(noteId):any
+  onTrash():any
   {
-    console.log(noteId);
+    this.textchange="Trash";
+    // console.log(noteId);
 
-      this.http.putReq("/note/trash?noteId="+noteId).subscribe(  
-       data=> {
-         console.log(data);
-         this.snackbar.open(data.Message,'Undo',{duration:1000})
-       });
+    //   this.http.putReq("/note/trash?noteId="+noteId).subscribe(  
+    //    data=> {
+    //      console.log(data);
+    //      this.snackbar.open(data.Message,'Undo',{duration:1000})
+    //    });
   }
   
 }

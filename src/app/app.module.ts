@@ -22,6 +22,7 @@ import { DialogboxComponent } from './dialogbox/dialogbox.component';
 import { BinComponent } from './bin/bin.component';
 import { GetnoteComponent } from './getnote/getnote.component';
 import { EditnoteComponent } from './editnote/editnote.component';
+import { LabelComponent } from './label/label.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { EditnoteComponent } from './editnote/editnote.component';
     BinComponent,
     GetnoteComponent,
     EditnoteComponent,
+    LabelComponent,
 
     
   ],
