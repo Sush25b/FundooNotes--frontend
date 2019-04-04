@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { decode } from 'punycode';
 import { Response } from 'selenium-webdriver/http';
+ import { DataService} from '../../app/service/data.service';
 
 @Component({
   selector: 'app-label',
@@ -13,32 +14,22 @@ import { Response } from 'selenium-webdriver/http';
 })
 export class LabelComponent implements OnInit {
 
-  labels:any
-  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
+  // labels:any;
+  // labelnotes:String;
+
+  message: any;
+
+  constructor(private data:DataService,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
   ngOnInit() 
   {
-    this.getLabel();
-  }
+    this.data.currentMessage.subscribe(
 
-  getLabel()
-  {
-    this.http.getRequest("/label/getAlls").subscribe(
-
-      (response)=> {
-         console.log("sucessfully get notes",response),
-       // this.data= response('body'),
-        //console.log("data-->",this.data)
-        this.labels =response;
-        console.log("got labels successfully",this.labels);
-      // if(response.body.status===402)
-      // {
-      //   this.snackbar.open(response.body.Message,'Undo',{duration:1000})
-      // }
-       },
-       (error)=> {
-            console.log("error",error);            
-       } 
+      (message)=>{
+        this.message =message
+      }
     )
   }
+
+
 }

@@ -67,6 +67,8 @@ export class HttpService {
     return this.http.get(environment.baseUrl + url,{ headers: new HttpHeaders().set("jwtToken", localStorage.getItem('token')) }
       );
    }
+
+   
   //old method i used
   // postForm(userData):Observable<any>{
   //   console.log(userData);

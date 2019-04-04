@@ -11,6 +11,7 @@ import { NoteComponent } from './note/note.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { BinComponent } from './bin/bin.component';
 import { GetnoteComponent } from './getnote/getnote.component';
+import { LabelComponent } from './../app/label/label.component';
 
 // routing components--> add here Only
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
         children:[
                   {path:'archive',component:ArchiveComponent},
                   {path:'bin',component:BinComponent},
-                  {path:'',component:GetnoteComponent}]
+                  {path:'',component:GetnoteComponent},
+                  {path:'labelnote',component:LabelComponent}]
   },
   {path: 'addnote',component:AddNoteComponent}
 ];

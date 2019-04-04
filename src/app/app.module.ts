@@ -23,6 +23,8 @@ import { BinComponent } from './bin/bin.component';
 import { GetnoteComponent } from './getnote/getnote.component';
 import { EditnoteComponent } from './editnote/editnote.component';
 import { LabelComponent } from './label/label.component';
+import { LabelsComponent } from './labels/labels.component';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { LabelComponent } from './label/label.component';
     GetnoteComponent,
     EditnoteComponent,
     LabelComponent,
+    LabelsComponent
 
     
   ],
@@ -56,11 +59,14 @@ import { LabelComponent } from './label/label.component';
     FlexLayoutModule,
     ReactiveFormsModule,
     MatTooltipModule,
+
     // RouterModule,
     RouterModule.forRoot([{path:'',component:AddNoteComponent}])
   ],
   exports: [
    // HttpClient
+
+
   ],
   providers: [],
   bootstrap: [AppComponent],

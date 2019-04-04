@@ -1,14 +1,7 @@
-<div class="parentdiv">
-  <div *ngFor="let lab of labels" style=" height:47px;">
-  <!-- these below div line===>is just a for loop, will not effect the flex-->
-    <!-- <mat-card class=""> -->
-        <div class="MB2">
-          <mat-button-toggle style="border: inherit;" (click)="onNotes()" routerLink="/dashboard">
-            <mat-icon class="spacebetween">label</mat-icon>
-            <textarea style="border-width: inherit;" matTextareaAutosize [(ngModel)]="lab.labelTitle"></textarea>
-          </mat-button-toggle>
-        </div><br>
-      <!-- </div>
-    </mat-card>
-  </div>
-</div> -->
+<!-- <div *ngFor="let note of userNote"> -->
+     <div>
+        <app-dialogbox [Note]=message></app-dialogbox>
+       
+      </div> 
+    
+      
