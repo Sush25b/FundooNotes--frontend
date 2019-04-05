@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import { decode } from 'punycode';
 import { Response } from 'selenium-webdriver/http';
+import { ViewserviceService} from 'src/app/service/viewservice.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,21 +15,52 @@ import { Response } from 'selenium-webdriver/http';
 })
 export class DashboardComponent implements OnInit 
 {
-  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
+  constructor(private viewservice: ViewserviceService,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
   // data:any;
   userNote:any;
   noteId:any;
   data:any;
   textchange="fundooNotes!";
+  list:boolean = true;
+  grid:boolean = false;
+
+  view:any;
+  wrap:string ="wrap";
+  direction:string;
+  layout:string;
   
   ngOnInit() 
   {
-    
+    this.viewservice.getView().subscribe(
+      (res )=> {
+      this.view = res;
+      this.direction = this.view.data;
+
+      console.log(this.direction);
+       this.layout = this.direction + " " + this.wrap;
+        })
+
     // this.getNotes();
     // this.http.getRequest("/note/getAll").subscribe((data)=> console.log(data))
   }
   
+  changeView()
+  {
+    if (this.list) 
+    {
+      this.grid = true;
+      this.list = false;
+      // this.dataservice.setCurrentdata(this.grid);
+    } 
+    else 
+    {
+      this.list = true;
+      this.grid = false;
+      // this.dataservice.setCurrentdata(this.list);
+    }
+     this.viewservice.gridview();
+  }
 
   loadNotes()
   {
@@ -66,6 +98,11 @@ export class DashboardComponent implements OnInit
   //   )
   // }
 
+  onLogout()
+  {
+    localStorage.clear();
+    this.router.navigateByUrl("/login");
+  }
 
   onNotes()
   {

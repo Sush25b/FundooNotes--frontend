@@ -1,3 +1,5 @@
+//-----------Old wrong file-------------
+
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../service/http.service';
 import { MatSnackBar} from '@angular/material';

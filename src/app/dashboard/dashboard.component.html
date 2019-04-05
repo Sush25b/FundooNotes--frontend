@@ -62,9 +62,25 @@
 
 
             <div class="toolbarspace">
-              <button mat-icon-button matTooltip="notifications">
-                <mat-icon>notifications</mat-icon>
+
+                <button mat-icon-button class="iconbtn" *ngIf="list" (click)="changeView()" fxShow="true" fxHide.lt-sm="true">
+                      <mat-icon class="icon">view_agenda</mat-icon>
+                </button>
+
+                <button mat-icon-button class="iconbtn" *ngIf="grid" (click)="changeView()" fxShow="true" fxHide.lt-sm="true">
+                      <!-- <img src="../../../assets/menu-grid.svg" style="width:20px; color: #6F6F6F;"> -->
+                      <mat-icon class="icon">view_module</mat-icon>
+                </button>
+
+
+              <button mat-icon-button matTooltip="profile" [matMenuTriggerFor]="profile">
+                <mat-icon>account_circle</mat-icon>
               </button>
+              <mat-menu #profile="matMenu">
+                <button mat-menu-item (click)="onLogout()">Logout</button>
+              </mat-menu>
+
+              
             </div>
         
           </mat-toolbar>

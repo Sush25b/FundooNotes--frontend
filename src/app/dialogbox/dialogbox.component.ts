@@ -9,25 +9,41 @@ import { Response } from 'selenium-webdriver/http';
 import {MatDialog,MatDialogConfig} from '@angular/material';
 import { from } from 'rxjs';
 import {EditnoteComponent} from 'src/app/editnote/editnote.component';
+import { ViewserviceService} from 'src/app/service/viewservice.service';
 
 @Component({
   selector: 'app-dialogbox',
   templateUrl: './dialogbox.component.html',
   styleUrls: ['./dialogbox.component.scss']
 })
+
 export class DialogboxComponent implements OnInit {
 
   noteData:any;
+
+  view:any;
+  wrap:string ="wrap";
+  direction:string;
+  layout:string;
 
   @Input()
   Note:any;
 
 
-  constructor(private dialog :MatDialog,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
+  constructor(private viewservice: ViewserviceService,private dialog :MatDialog,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     console.log(this.Note);
     // this.data=this.Note;
+
+    this.viewservice.getView().subscribe(
+      (res) => {
+                this.view = res;
+                  this.direction = this.view.data;
+
+                  console.log(this.direction);
+                  this.layout = this.direction + " " + this.wrap;
+        })
   }
 
   openDilog(note:any)
