@@ -1,0 +1,59 @@
+/*mat card padding*/
+.matpad
+{
+  height: 39px;
+    width: 390px;
+    padding-left: 36px;
+}
+
+.mat-form-field 
+{
+  margin-right: 12px;
+}
+
+.matpad2
+{
+  height: 116px;
+  width: 379px;
+  padding-left: 21px;
+}
+
+
+.titlebar
+{
+  height: 23px;
+  width: 265px;
+  padding-right: 29px;
+}
+
+
+.descp
+{
+  height: 80px;
+  width: 300px;
+}
+
+.maticonflex
+{
+  display: flex;
+  flex-flow: row;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+.example-full-width {
+width: 100%;
+}
+
+.colorlens {
+  width: 29px;
+  height: 30px;
+  margin-right: 4px;
+  margin-bottom: 5px;
+  margin-left: 4px;
+  margin-top: 5px;
+}

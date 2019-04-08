@@ -1,0 +1,177 @@
+<div>
+  <!-- <form class="example-form">
+                <mat-form-field class="example-full-width">
+                  <input matInput placeholder="Favorite food" value="Sushi">
+                </mat-form-field>
+            </form> -->
+  <mat-card *ngIf="flag===false" class="matpad" (click)="show()">
+    <div>
+      <input class="titlebar" matInput placeholder="take a note...">
+
+      <button mat-icon-button matTooltip="Brush" routerLink="/dashboard" style="margin-right: 3px">
+        <mat-icon style="font-size: 18px !important">brush</mat-icon>
+      </button>
+
+      <button mat-icon-button matTooltip="Image" routerLink="/dashboard" style="margin-right: 3px">
+        <mat-icon style="font-size: 18px !important">photo</mat-icon>
+      </button>
+
+    </div>
+  </mat-card>
+</div>
+
+<div>
+    <!-- <form [formGroup]="addnoteForm"> -->
+
+          <mat-card *ngIf="flag===true" class="matpad2" [ngStyle]="{ 'background-color': colors}"  >
+            <div>
+              <!-- <input class="titlebar" matInput placeholder="take a note..."> -->
+
+              <!-- pin_drop -->
+              <div>
+
+                <input class="titlebar"  matTextareaAutosize  [(ngModel)]="Note.title"  matInput placeholder="Title">
+                    <!-- mat icon button====> pin symbol-->
+                    <button mat-icon-button matTooltip="Pin" routerLink="/dashboard" style="padding-left: 38px;" >
+                      <mat-icon style="font-size: 18px !important" >pin_drop</mat-icon>
+                    </button>
+              </div><br>
+
+              <div>
+                <input class="titlebar" matTextareaAutosize [(ngModel)]="Note.description"  matInput placeholder="Take a note...">
+              </div>
+
+              <!-- <div>
+                <input class="titlebar"
+              </div> -->
+
+              <div>
+                <mat-chip-list>
+                  <mat-chip  *ngIf = "timer"><mat-icon style = "margin-right: 10px;margin-left: -9px;">timer</mat-icon>{{currentDateAndTime}}</mat-chip>
+              </mat-chip-list>
+              </div>
+              
+              <div>
+                <!-- <input class="titlebar" matTextareaAutosize formControlName="description"  matInput placeholder="Take a note..."> -->
+                <!-- <mat-form-field class="example-full-width">
+                  <input class="titlebar" matTextareaAutosize formControlName="datetime" >
+                   -->
+                  <!-- <mat-datepicker-toggle matSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                 -->
+                <!-- </mat-form-field> -->
+              </div>              
+
+              <!-- <div class="divspace">
+                <button mat-icon-button matTooltip="New note with drawing" routerLink="/dashboard">
+                  <mat-icon>alert</mat-icon>
+                </button>
+              </div> -->
+
+              <div class="maticonflex">
+
+                <div >
+                  <button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="Reminder" >
+                    <mat-icon style="font-size: 17px !important">add_alert</mat-icon>
+                    <!-- <button mat-raised-button (click)="picker.open()">Open</button> -->
+                  </button>
+                </div>
+
+                <div >
+                  <button mat-icon-button matTooltip="Collaborate"  routerLink="/dashboard">
+                    <mat-icon style="font-size: 17px !important">group_add</mat-icon>
+                  </button>
+                </div>
+
+                <div >
+                  <button mat-icon-button matTooltip="Change Color" [matMenuTriggerFor]="buttonMenu"  routerLink="/dashboard">
+                    <mat-icon style="font-size: 17px !important">color_lens</mat-icon>
+                  </button>
+                </div>
+
+                <div >
+                  <button mat-icon-button matTooltip="Add Image" routerLink="/dashboard">
+                    <mat-icon style="font-size: 17px !important">image</mat-icon>
+                  </button>
+                </div>
+
+                <div >
+                  <button mat-icon-button matTooltip="Archive" routerLink="/dashboard">
+                    <mat-icon style="font-size: 17px !important">archive</mat-icon>
+                  </button>
+                </div>
+
+                <div >
+                  <button mat-icon-button matTooltip="More Option" routerLink="/dashboard">
+                    <mat-icon style="font-size: 17px !important">more_vert</mat-icon>
+                  </button>
+                </div>
+
+                <div >
+                  <button mat-icon-button matTooltip="Undo" routerLink="/dashboard">
+                    <mat-icon style="font-size: 17px !important">undo</mat-icon>
+                  </button>
+                </div>
+                <div >
+                  <button mat-icon-button matTooltip="Redo" routerLink="/dashboard">
+                    <mat-icon style="font-size: 16px !important">redo</mat-icon>
+                  </button>
+                </div>
+
+                <!-- <div>
+                  for Next button
+                  <button mat-button>Next</button>
+                  <nav>
+                      <a class="button" (click)="onLogin()">Login</a>
+                  </nav>
+                </div> -->
+
+                <div class="divspace">
+                  <!-- <button mat-icon-button matTooltip="New note with drawing" routerLink="/dashboard"> -->
+                  <button mat-button matTooltip="close" (click)="show(); onClose();">Close</button>
+                </div>
+
+              </div>
+            </div>
+          </mat-card>
+
+          <mat-menu #Reminder="matMenu">
+              <button mat-menu-item style="height: 35px;">Later today    8:00 PM</button>
+              <button mat-menu-item style="height: 35px;">Tomorrow      8:00 PM</button>
+              <button mat-menu-item style="height: 35px;">Next week     8:00 PM</button>
+              <button mat-menu-item style="height: 35px;">Home         Address</button>
+              <button mat-menu-item style="height: 35px;">Work         Address</button>
+
+              <button mat-menu-item>
+                <mat-form-field class="example-full-width">
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                  <mat-datepicker-toggle matSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </button>
+          </mat-menu>
+
+          <mat-menu [overlapTrigger]="false" #buttonMenu="matMenu">
+            <button matTooltip="Yellow" (click)="setColorToTitle('#fcf476')" mat-mini-fab class="colorlens" style="background-color:#fcf476"></button>
+            <button matTooltip="Orange" (click)="setColorToTitle('#f8bc04')" mat-mini-fab class="colorlens" style="background-color:#f8bc04 "></button>
+            <button matTooltip="Red" (click)="setColorToTitle('#f28b82 ')" mat-mini-fab class="colorlens" style="background-color:#f28b82 "></button>
+            <button matTooltip="White" (click)="setColorToTitle('#ffffff ')" mat-mini-fab class="colorlens" style="background-color:#ffffff "></button>
+            <br />
+            <button matTooltip="Dark blue" (click)="setColorToTitle('#aecbfa ')" mat-mini-fab class="colorlens" style="background-color:#aecbfa "></button>
+            <button matTooltip="Blue" (click)="setColorToTitle('#cbf0f8 ')" mat-mini-fab class="colorlens" style="background-color:#cbf0f8 "></button>
+            <button matTooltip="Teal" (click)="setColorToTitle('#a7ffea ')" mat-mini-fab class="colorlens" style="background-color:#a7ffea "></button>
+            <button matTooltip="Green" (click)="setColorToTitle('#ccff90 ')" mat-mini-fab class="colorlens" style="background-color:#ccff90 "></button>
+            <br />
+            <button matTooltip="Gray" (click)="setColorToTitle('#e8eaed')" mat-mini-fab class="colorlens" style="background-color:#e8eaed "></button>
+            <button matTooltip="Brown" (click)="setColorToTitle('#e6c9a8 ')" mat-mini-fab class="colorlens" style="background-color:#e6c9a8 "></button>
+            <button matTooltip="Pink" (click)="setColorToTitle('#fccfe8 ')" mat-mini-fab class="colorlens" style="background-color:#fccfe8 "></button>
+            <button matTooltip="Purple" (click)="setColorToTitle('#d7aefb ')" mat-mini-fab class="colorlens" style="background-color:#d7aefb "></button>
+          </mat-menu>
+
+    <!-- </form> -->
+
+</div>

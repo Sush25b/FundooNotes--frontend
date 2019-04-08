@@ -1,0 +1,75 @@
+<div class="bg">
+
+  <!-- div for form-->
+  <form [formGroup]="registerForm">
+
+    <!-- div for form-->
+    <div fxLayout="column" fxLayoutAlign="center center" class="flex-container">
+      <mat-card class="matpad">
+        <h2 style="font-size:150%; text-align:center; color: rgb(49, 100, 177)"> fundooNotes!</h2>
+        <h3 class="h3">Register</h3>
+
+        <!--DIV FOR FEILDS-->
+
+        <!--div  for first name-->
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="enter first name" formControlName="firstName" required>
+            <mat-error *ngIf="firstName.invalid">{{getErrorMessageFirstName()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!--div  for last name-->
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="enter last name" formControlName="lastName" required>
+            <mat-error *ngIf="lastName.invalid">{{getErrorMessageLastName()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!--div  for phone no-->
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="enter phone no" formControlName="phoneno" required>
+            <mat-error *ngIf="phoneno.invalid">{{getErrorMessagePhoneNo()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <!--div  for emailid -->
+        <div class="example-container" appearance="outline">
+            <mat-form-field>
+              <input matInput placeholder="enter email id" formControlName="emailid" required>
+              <mat-error *ngIf="emailid.invalid">{{getErrorMessageEmailid()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+        <!--div  for password-->
+        <div class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="enter password" formControlName="password" required>
+            <mat-error *ngIf="password.invalid">{{getErrorMessagePassword()}}</mat-error>
+          </mat-form-field>
+        </div>
+
+
+        <div>
+          <!-- for Next button-->
+          <!-- <button mat-button>Next</button> -->
+          <nav>
+            <a class="button" (click)="onRegister()">Sumit</a>
+          </nav>
+        </div>
+
+        <div>
+          <!-- for href (routing )-->
+          <nav>
+            <h5>Already Registered?? </h5>
+            <a routerLink="/login">Login</a>
+          </nav>
+          <!-- <a href="" style="color:rgb(61, 61, 182);font-size:80%;" ><br>forget password?</a> -->
+        </div>
+
+      </mat-card>
+    </div>
+  </form>
+</div>
