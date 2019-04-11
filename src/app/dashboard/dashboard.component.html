@@ -73,6 +73,7 @@
                 </button>
 
 
+<<<<<<< HEAD
               <button mat-icon-button matTooltip="profile" [matMenuTriggerFor]="profile" >
                 <mat-icon>account_circle</mat-icon>
               </button>
@@ -81,6 +82,15 @@
                 <button mat-menu-item routerLink="profilepic">Profilepic</button>
                 <button mat-menu-item (click)="onLogout()">Logout</button>
               </mat-menu>
+=======
+              <button mat-icon-button matTooltip="profile" [matMenuTriggerFor]="profile">
+                <mat-icon>account_circle</mat-icon>
+              </button>
+              <mat-menu #profile="matMenu">
+                <button mat-menu-item (click)="onLogout()">Logout</button>
+              </mat-menu>
+
+>>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
               
             </div>
         

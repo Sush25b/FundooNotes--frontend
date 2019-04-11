@@ -32,18 +32,30 @@ export class DialogboxComponent implements OnInit {
 
   constructor(private viewservice: ViewserviceService,private dialog :MatDialog,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
+<<<<<<< HEAD
   ngOnInit() 
   {
+=======
+  ngOnInit() {
+>>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
     console.log(this.Note);
     // this.data=this.Note;
 
     this.viewservice.getView().subscribe(
       (res) => {
+<<<<<<< HEAD
                   this.view = res;
                   this.direction = this.view.data;
                   
                   console.log(this.direction);
                   // this.layout = this.direction + " " + this.wrap;
+=======
+                this.view = res;
+                  this.direction = this.view.data;
+
+                  console.log(this.direction);
+                  this.layout = this.direction + " " + this.wrap;
+>>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
         })
   }
 

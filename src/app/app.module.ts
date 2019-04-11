@@ -24,8 +24,12 @@ import { GetnoteComponent } from './getnote/getnote.component';
 import { EditnoteComponent } from './editnote/editnote.component';
 import { LabelComponent } from './label/label.component';
 import { LabelsComponent } from './labels/labels.component';
+<<<<<<< HEAD
 import { UserprofileComponent } from './userprofile/userprofile.component';
 import {     ImageCropperComponent } from 'ng2-img-cropper';
+=======
+
+>>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
 
 @NgModule({
   declarations: [
@@ -46,9 +50,14 @@ import {     ImageCropperComponent } from 'ng2-img-cropper';
     GetnoteComponent,
     EditnoteComponent,
     LabelComponent,
+<<<<<<< HEAD
     LabelsComponent,
     UserprofileComponent,
     ImageCropperComponent
+=======
+    LabelsComponent
+
+>>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
     
   ],
   imports: [

@@ -34,11 +34,19 @@ export class DashboardComponent implements OnInit
   {
     this.viewservice.getView().subscribe(
       (res )=> {
+<<<<<<< HEAD
                   this.view = res;
                   this.direction = this.view.data;
 
                   console.log(this.direction);
                   // this.layout = this.direction + " " + this.wrap;
+=======
+      this.view = res;
+      this.direction = this.view.data;
+
+      console.log(this.direction);
+       this.layout = this.direction + " " + this.wrap;
+>>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
         })
 
     // this.getNotes();
@@ -47,6 +55,7 @@ export class DashboardComponent implements OnInit
   
   changeView()
   {
+<<<<<<< HEAD
           // this grid/list is only use to ==> diplay the button on toolbar
           if (this.list) 
           {
@@ -63,6 +72,21 @@ export class DashboardComponent implements OnInit
 
           // viewservice===> is the service.ts file to change the entity(direction) here
           this.viewservice.gridview();
+=======
+    if (this.list) 
+    {
+      this.grid = true;
+      this.list = false;
+      // this.dataservice.setCurrentdata(this.grid);
+    } 
+    else 
+    {
+      this.list = true;
+      this.grid = false;
+      // this.dataservice.setCurrentdata(this.list);
+    }
+     this.viewservice.gridview();
+>>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
   }
 
   loadNotes()
