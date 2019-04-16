@@ -12,30 +12,26 @@ import { ArchiveComponent } from './archive/archive.component';
 import { BinComponent } from './bin/bin.component';
 import { GetnoteComponent } from './getnote/getnote.component';
 import { LabelComponent } from './../app/label/label.component';
-<<<<<<< HEAD
 import { UserprofileComponent } from '../app/userprofile/userprofile.component';
-=======
->>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
 
 // routing components--> add here Only
 const routes: Routes = [
   {path:'',component:TestComponent},
   {path:'login', component:LoginComponent},
+  {path:'fundooNotes/user/:token/validate',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'forgetpassword',component:ForgetpasswordComponent},
   {path:'user/:token',component:ResetpasswordComponent},
+  {path:'fundooNotes/user/:token/resetPassword',component:ResetpasswordComponent},
   {path: 'test',component:TestComponent},
   {path: 'dashboard',component:DashboardComponent,
         children:[
                   {path:'archive',component:ArchiveComponent},
                   {path:'bin',component:BinComponent},
                   {path:'',component:GetnoteComponent},
-<<<<<<< HEAD
                   {path:'labelnote',component:LabelComponent},
-                  {path:'profilepic',component:UserprofileComponent}]
-=======
-                  {path:'labelnote',component:LabelComponent}]
->>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
+                  {path:'profilepic',component:UserprofileComponent}
+                 ]
   },
   {path: 'addnote',component:AddNoteComponent}
 ];

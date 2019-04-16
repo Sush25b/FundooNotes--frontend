@@ -6,7 +6,7 @@
             </form> -->
   <mat-card *ngIf="flag===false" class="matpad" (click)="show()">
     <div>
-      <input class="titlebar" matInput placeholder="take a note...">
+      <input class="titlebar2" matInput placeholder="take a note...">
 
       <button mat-icon-button matTooltip="Brush" routerLink="/dashboard" style="margin-right: 3px">
         <mat-icon style="font-size: 18px !important">brush</mat-icon>
@@ -32,8 +32,8 @@
 
                 <input class="titlebar"  matTextareaAutosize  [(ngModel)]="Note.title"  matInput placeholder="Title">
                     <!-- mat icon button====> pin symbol-->
-                    <button mat-icon-button matTooltip="Pin" routerLink="/dashboard" style="padding-left: 38px;" >
-                      <mat-icon style="font-size: 18px !important" >pin_drop</mat-icon>
+                    <button mat-icon-button matTooltip="Pin" routerLink="/dashboard" style="padding-left: 94px;" >
+                      <mat-icon ><img src="../../assets/pinBeforeClick.svg"></mat-icon>
                     </button>
               </div><br>
 

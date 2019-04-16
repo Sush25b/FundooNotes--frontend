@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { NoteComponent } from '../note/note.component';
+import { CurrentnoteService } from '../service/currentnote.service';
 // import * as moment from 'moment';
 
 // 
@@ -20,12 +21,12 @@ import { NoteComponent } from '../note/note.component';
 
 export class AddNoteComponent implements OnInit {
 
-  constructor(private mattooltip:MatTooltipModule, private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
+  constructor( private CurrentnoteS: CurrentnoteService,private mattooltip:MatTooltipModule, private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
   private flag= false;
-  colors:String;
-  title:any;
-  description:any;
+  colors:String="white";
+  title:any="";
+  description:any="";
   // fulldate:string;
   // currentDateAndTime:String
 
@@ -75,13 +76,18 @@ export class AddNoteComponent implements OnInit {
     //   "description":this.description.value,
     //   "color":this.colors
     // }
-    
 
     this.http.postRequestT("/note/createnote",this.Note).subscribe(
     data=> {
       console.log(data);
-      this.snackbar.open(data.Message,'Undo',{duration:1000})
+      this.snackbar.open(data.message,'Undo',{duration:1000})
     });
+
+    setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 2000 );
+
+    this.Note.title=null;
+    this.Note.color=null;
+    this.Note.description=null; 
   }
 
   setColorToTitle(color)

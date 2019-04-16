@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup,FormControl, Validators} from '@angular/forms';
-
+import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import {ForgetpasswordModel } from 'src/app/model/forgetpassword.model';
 import { HttpService } from '../service/http.service';
@@ -11,7 +11,7 @@ import { HttpService } from '../service/http.service';
 })
 export class ForgetpasswordComponent implements OnInit {
 
-  constructor(private router: Router, private formBuilder: FormBuilder,private http:HttpService) { }
+  constructor( private snackbar: MatSnackBar,private router: Router, private formBuilder: FormBuilder,private http:HttpService) { }
 
   user: ForgetpasswordModel = new ForgetpasswordModel();
 
@@ -46,11 +46,26 @@ export class ForgetpasswordComponent implements OnInit {
 
     //postrequest--->is the server Method 
     // to which api it should hit
-    this.http.postRequest("/forgetpassword",this.forgetpasswordForm.value).subscribe(
-      (response) => {console.log("success",response)
-     this.router.navigateByUrl('/forgetpassword')},     //redirect to same page   
-     (error)=> {console.log("error",error)}
+    this.http.postRequest("/forgetpassword",this.forgetpasswordForm.value).subscribe
+    (
+      (data) => {
+                    console.log("success",data);     //redirect to same page   
+                    
+                    if(data.status === 200) 
+                    {
+                      // debugger
+                    
+                      //snackbar
+                      this.snackbar.open(data.message, 'Undo', { duration: 1000 });
+                    }
+                    else 
+                    {
+                      this.snackbar.open(data.message, 'Undo', { duration: 1000 });
+                    }
+                },
+    (error)=> {console.log("error",error)}
     )
+    // this.router.navigateByUrl('fundooNotes/user/resetPassword');
 
   }
 }

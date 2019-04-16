@@ -23,7 +23,8 @@ export class LabelsComponent implements OnInit {
   constructor(private data:DataService,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
   
   ngOnInit() 
-  {this.getLabel();
+  {
+    this.getLabel();
     
     this.data.currentMessage.subscribe(
 

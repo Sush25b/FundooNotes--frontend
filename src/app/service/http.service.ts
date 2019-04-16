@@ -31,12 +31,13 @@ export class HttpService {
   }
 
 
-  // public postRequestT(url,data): Observable<any>
-  // {
-  //   console.log("1111111111111111111"+localStorage.getItem('token'));
-  //   //,observe:'response'
-  //   return this.http.post(this.baseUrl + url,data,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
-  //   )
+  public postReq(url): Observable<any>
+  {
+    console.log("1111111111111111111"+localStorage.getItem('token'));
+    //,observe:'response'
+    return this.http.post(this.baseUrl + url,"",{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
+    )
+  }
 
   //get all notes
   public putReq(url): Observable<any>
@@ -61,12 +62,41 @@ export class HttpService {
   {
   return this.http.post(this.baseUrl + url, {ResponseType: 'test'})
   }
+
+  public putRequestT(url,data):Observable<any>
+  {
+       return this.http.put(this.baseUrl + url,data,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))})
+  }
+  
   
   public getRequest(url): Observable<any>
    {
+     console.log(environment.baseUrl + url)
     return this.http.get(environment.baseUrl + url,{ headers: new HttpHeaders().set("jwtToken", localStorage.getItem('token')) }
       );
    }
+
+   public getResetReq(url): Observable<any>
+   {
+    return this.http.get(environment.baseUrl + url);
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+  // public getRequestT(url,data): Observable<any>
+  // {
+  //  return this.http.get(this.baseUrl + url,data,{ headers: new HttpHeaders().set("jwtToken", localStorage.getItem('token')) }
+  //    );
+  // }
 
    
   //old method i used

@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
 
+  private f:string="log";
+  private log:string="log";
+  
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+
   }
 
 }

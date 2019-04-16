@@ -1,6 +1,81 @@
+<!-- <div *ngFor= "let note of userNote" >  -->
+<div>
+  <!-- <app-dialogbox [Note]="userNote"></app-dialogbox> -->
+  <!-- <input [(ngModel)]= "note.title"> -->
+</div>
 
-    <!-- <div *ngFor= "let note of userNote" >  -->
-        <div>
-          <app-dialogbox [Note]="userNote"></app-dialogbox>
-          <!-- <input [(ngModel)]= "note.title"> -->
-        </div>
+<div fxLayout="{{direction}} wrap" fxLayoutAlign="space-around center">
+  <!-- <div *ngIf="direction===row"> -->
+
+  <div  *ngFor="let notes of userNote">
+    <div>
+
+      <div style=" margin-top: 6px; margin-bottom: 15px;">
+        <!-- <mat-card class="matpad" [ngStyle]="{ 'background-color': notes.color}"> -->
+        <mat-card [ngClass]=" direction =='row' ? 'matpad':'matpad3' " [ngStyle]="{ 'background-color': notes.color}">
+
+          <div style="  display: flex; flex-direction: row; justify-content: space-between;">
+            <!-- <input [(ngModel)]="notes.title"> -->
+            <div (click)="openDilog(notes)">
+              <textarea style="border-width: inherit; margin-top: 12px;" matTextareaAutosize [(ngModel)]="notes.title"
+                [ngStyle]="{ 'background-color': notes.color}"></textarea>
+              <!-- <mat-icon style="font-size: 18px !important" (click)="onPin();">pin_drop</mat-icon>
+                                </div ><br>
+                                <div> -->
+            </div>
+          </div><br>
+
+          <div>
+            <!-- <input [(ngModel)]="notes.description"> -->
+            <textarea style="border-width: inherit;" matTextareaAutosize [(ngModel)]="notes.description"
+              [ngStyle]="{ 'background-color': notes.color}"></textarea>
+            <div>
+
+              <div style="margin-top: 12px;">
+                <mat-chip-list>
+                  <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
+                    {{lab.labelTitle}}
+                    <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+
+              <div style="margin-top: 12px;">
+                <mat-chip-list>
+                  <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
+                    {{lab.labelTitle}}
+                    <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+
+            <div class="maticonflex">
+              <div>
+                <button mat-icon-button matTooltip="More Option" [matMenuTriggerFor]="MoreOption">
+                  <mat-icon style="font-size: 17px !important">more_vert</mat-icon>
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+          <mat-menu #MoreOption="matMenu">
+            <!-- <button mat-menu-item style="height: 35px;">Delete note</button> -->
+            <button mat-menu-item style="height: 35px;" (click)="delete(notes.noteId);">Delete Forever</button>
+            <button mat-menu-item style="height: 35px;" (click)="onTrash(notes.noteId);">Restore</button>
+
+          </mat-menu>
+
+        </mat-card>
+
+      </div>
+
+
+    </div>
+  </div><br>
+
+</div>

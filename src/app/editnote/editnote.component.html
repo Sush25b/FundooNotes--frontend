@@ -6,61 +6,77 @@
 </mat-card>
 </div> -->
 
+<!-- style="  margin-top: 30px; margin-bottom: 30px;" -->
+
 <!-- <div fxLayout="row" fxLayoutAlign="space-around center"> -->
   <div class="parentdiv">
     <!-- *ngFor= "let note of userNote" -->
     <!-- these below div line===>is just a for loop, will not effect the flex-->
     <div > 
-        <div style="  margin-top: 30px; margin-bottom: 30px;">
-          <mat-card class="matpad2" (click) = "update()"  >
+        <div >
+          <mat-card class="matpad3" (click) = "update()" [ngStyle]="{ 'background-color': note.color}"  >
                 <div>
-                      <div>
-                        <div >
-                            <input matTextareaAutosize [(ngModel)]= "note.title">
+                      <div >
+                        <div  style="  display: flex; flex-direction: row; justify-content: space-between;" >
+                        
+                            <textarea style="border-width: inherit; width: -webkit-fill-available; margin-top: 12px;" matTextareaAutosize [(ngModel)]="note.title" [ngStyle]="{ 'background-color': note.color}"></textarea>
+                            <!-- <input matTextareaAutosize [(ngModel)]= "note.title"> -->
                             <!-- <mat-icon style="font-size: 18px !important" (click)="onPin();">pin_drop</mat-icon>
                         </div ><br>
                         <div> -->
   
                             <button mat-icon-button matTooltip="Pin" routerLink="/dashboard">
-                                 <mat-icon style="margin-left: 15px; font-size: 18px !important" (click)="onPin(note.noteId);">pin_drop</mat-icon>
+                                 <mat-icon style="margin-left: 15px; font-size: 18px !important" (click)="onPin(note.noteId);">place</mat-icon>
                             </button>
                         
-                        </div ><br>
-                        <div >
-                            <input matTextareaAutosize [(ngModel)]= "note.description">
-                        <div>     
+                        </div><br>
+                        <div>
+                            <!-- <input matTextareaAutosize [(ngModel)]= "note.description"> -->
+                            <textarea style="border-width: inherit; width: -webkit-fill-available;" matTextareaAutosize [(ngModel)]="note.description" [ngStyle]="{ 'background-color': note.color}"></textarea>
+                        <div>
+                          
+                        <div style="margin-top: 12px;">
+                            <mat-chip-list>
+                                  <mat-chip *ngFor = "let lab of note.label " [selectable]="selectable"
+                                      [removable]="removable" (removed)="remove(lab)" [ngStyle]="{ 'background-color': note.color}"> 
+                                              {{lab.labelTitle}} 
+                                        <mat-icon matChipRemove (click) = "removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                                  </mat-chip>
+                            </mat-chip-list>   
+                        </div>
+                
                       </div>
   
                       <div class="maticonflex">
   
                           <div >
                             <button mat-icon-button  matTooltip="Reminder" [matMenuTriggerFor]="Reminder"  routerLink="#">
-                              <mat-icon style="font-size: 17px !important">add_alert</mat-icon>
+                              <mat-icon style="font-size: 21px !important">add_alert</mat-icon>
                             </button>
                           </div>
   
                           <div >
                             <button mat-icon-button matTooltip="Collaborate" routerLink="/dashboard">
-                              <mat-icon style="font-size: 17px !important">group_add</mat-icon>
+                              <mat-icon style="font-size: 21px !important">group_add</mat-icon>
                             </button>
                           </div>
   
                           <div >
                             <button mat-icon-button matTooltip="Change Color" routerLink="/dashboard">
-                              <mat-icon style="font-size: 17px !important">color_lens</mat-icon>
+                              <mat-icon style="font-size: 21px !important">color_lens</mat-icon>
                             </button>
                           </div>
   
                           <div >
                             <button mat-icon-button matTooltip="Add Image" routerLink="/dashboard">
-                              <mat-icon style="font-size: 17px !important">image</mat-icon>
+                              <mat-icon style="font-size: 21px !important">image</mat-icon>
                             </button>
                           </div>
   
                           <div >
                             <button mat-icon-button matTooltip="Archive" routerLink="/dashboard">
                                   <!-- <mat-icon style="font-size: 17px !important">archive</mat-icon> -->
-                              <mat-icon style="font-size: 17px !important" (click)="onArchive(note.noteId);">archive</mat-icon>
+                              <mat-icon style="font-size: 21px !important" (click)="onArchive(note.noteId);">archive</mat-icon>
                             </button>
                           </div>
   
@@ -68,6 +84,11 @@
                             <button mat-icon-button matTooltip="More Option" [matMenuTriggerFor]="MoreOption" routerLink="/dashboard">
                               <mat-icon style="font-size: 17px !important">more_vert</mat-icon>
                             </button>
+                          </div>
+
+                          <div class="divspace">
+                              <!-- <button mat-icon-button matTooltip="New note with drawing" routerLink="/dashboard"> -->
+                              <button mat-button matTooltip="close" (click)="update();">Close</button>
                           </div>
   
                       </div>

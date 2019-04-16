@@ -30,16 +30,20 @@ export class ArchiveComponent implements OnInit {
   {
     this.http.getRequest("/note/getAlls"+"?trash=false&archive=true").subscribe(
 
-      (response)=> {
+      (response)=> 
+      {
          console.log("sucessfully get notes",response),
        // this.data= response('body'),
         //console.log("data-->",this.data)
         this.userNote =response;
         console.log("userNote",this.userNote);
-      // if(response.body.status===402)
-      // {
-      //   this.snackbar.open(response.body.Message,'Undo',{duration:1000})
-      // }
+     
+        // if (response.status === 200) {
+        //   this.snackbar.open(response.message, 'ok', { duration: 10000 });
+        // }
+        // else {
+        //   this.snackbar.open(response.message, 'try again', { duration: 10000 });
+        // }
        },
        (error)=> {
             console.log("error",error);            

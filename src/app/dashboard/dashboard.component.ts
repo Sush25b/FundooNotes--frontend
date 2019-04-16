@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { decode } from 'punycode';
 import { Response } from 'selenium-webdriver/http';
 import { ViewserviceService} from 'src/app/service/viewservice.service';
+import { SearchService } from 'src/app/service/search.service';
+import { EditlabelComponent } from '../editlabel/editlabel.component';
+import {MatDialog,MatDialogConfig} from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +18,7 @@ import { ViewserviceService} from 'src/app/service/viewservice.service';
 })
 export class DashboardComponent implements OnInit 
 {
-  constructor(private viewservice: ViewserviceService,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
+  constructor(private dialog:MatDialog,private searchS:SearchService,private viewservice: ViewserviceService,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
   // data:any;
   userNote:any;
@@ -29,33 +32,39 @@ export class DashboardComponent implements OnInit
   wrap:string ="wrap";
   direction:string;
   layout:string;
+
+  searchterm:String;
   
+  labels:any;
+  labelTitle:String;
+
   ngOnInit() 
   {
     this.viewservice.getView().subscribe(
       (res )=> {
-<<<<<<< HEAD
                   this.view = res;
                   this.direction = this.view.data;
 
                   console.log(this.direction);
                   // this.layout = this.direction + " " + this.wrap;
-=======
-      this.view = res;
-      this.direction = this.view.data;
-
-      console.log(this.direction);
-       this.layout = this.direction + " " + this.wrap;
->>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
-        })
-
+        }),
     // this.getNotes();
     // this.http.getRequest("/note/getAll").subscribe((data)=> console.log(data))
+
+    //it is used to search
+    this.searchS.changeMessage(this.searchterm);
+
+   this.getAllLabels();
+   
+
   }
   
+  search()
+  {
+    this.searchS.changeMessage(this.searchterm);
+  }
   changeView()
   {
-<<<<<<< HEAD
           // this grid/list is only use to ==> diplay the button on toolbar
           if (this.list) 
           {
@@ -72,21 +81,6 @@ export class DashboardComponent implements OnInit
 
           // viewservice===> is the service.ts file to change the entity(direction) here
           this.viewservice.gridview();
-=======
-    if (this.list) 
-    {
-      this.grid = true;
-      this.list = false;
-      // this.dataservice.setCurrentdata(this.grid);
-    } 
-    else 
-    {
-      this.list = true;
-      this.grid = false;
-      // this.dataservice.setCurrentdata(this.list);
-    }
-     this.viewservice.gridview();
->>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
   }
 
   loadNotes()
@@ -113,7 +107,7 @@ export class DashboardComponent implements OnInit
   //      // this.data= response('body'),
   //       //console.log("data-->",this.data)
   //       this.userNote =response;
-
+                                                                                                                                                                                                        
   //     // if(response.body.status===402)
   //     // {
   //     //   this.snackbar.open(response.body.Message,'Undo',{duration:1000})
@@ -173,5 +167,36 @@ export class DashboardComponent implements OnInit
     //      this.snackbar.open(data.Message,'Undo',{duration:1000})
     //    });
   }
+
+  editlabel(){
+
+    const dialogConfig = new  MatDialogConfig();
+ 
+
+    dialogConfig.data = {
+                 label:this.labels            
+                        }
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    console.log(this.labels);
+    this.dialog.open(EditlabelComponent,dialogConfig)
+    
+
+  }
+
+  getAllLabels(){
+    this.http.getRequest("/label/getAlls").subscribe(
+      (response) =>{
+       // console.log(data);
+        this.labels=response;
+        console.log(this.labels)
+      }
+    )
+
+  }
+  addLabel(){
+    console.log(this.labels)
+  }
+  
   
 }

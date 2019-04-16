@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-
-import { Router } from '@angular/router';
+import { MatSnackBar} from '@angular/material';
+import { Router,ActivatedRoute } from '@angular/router';
 import { ResetpasswordModel } from 'src/app/model/resetpassword.model';
 import { HttpService } from '../service/http.service';
 
@@ -16,7 +16,10 @@ export class ResetpasswordComponent implements OnInit
   token: string;
   url: string;
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpService) { }
+  constructor(
+    private active: ActivatedRoute,
+    private router: Router,
+     private formBuilder: FormBuilder, private http: HttpService,private snackbar: MatSnackBar) { }
 
   reset: ResetpasswordModel = new ResetpasswordModel();
   //
@@ -39,19 +42,23 @@ export class ResetpasswordComponent implements OnInit
 
   onresetpassword()
    {
-     console.log(this.token);
-    this.url = this.token + '?password=' + this.reset.password;
-    // if ( this.reset.password !== this.reset.confirmpassword)
-    if (false) {
-      //
-    } else {
 
-      this.http.putRequest(this.url).subscribe(
-        (response) => {
-          console.log("success", response)
-        } );   
-  }
-}
+      console.log( this.active.snapshot.paramMap.get('token') , this.resetpasswordForm.value.password);
+      this.http.getResetReq("/user/resetPassword/"+this.active.snapshot.paramMap.get('token')+"?password="+this.resetpasswordForm.value.password).subscribe(
+            (response) => {
+                               console.log("success",response);
+                            
+                                if (response.status === 200) {
+                                  this.snackbar.open(response.message, 'ok', { duration: 10000 });
+                                }
+                                else {
+                                  this.snackbar.open(response.message, 'try again', { duration: 10000 });
+                                };
+                                this.router.navigateByUrl('/login');
+                          },     //redirect to same page   
+            (error)=> {console.log("error",error)}
+      )
+   }
 }
     
     

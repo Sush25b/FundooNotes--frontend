@@ -20,6 +20,13 @@
   padding-left: 21px;
 }
 
+.matpad3
+{
+    height: max-content;
+    width: 585px;
+    padding-left: 16px;
+}
+
 
 .titlebar
 {
@@ -46,6 +53,9 @@
 {
   display: flex;
   flex-flow: row;
+  margin-top: 20px;
+  width:55%;
+  justify-content: space-between;
 }
 
 .example-form {
@@ -56,5 +66,10 @@
   
 .example-full-width {
 width: 100%;
+}
+
+.divspace
+{
+  margin-left: 271px;
 }
 

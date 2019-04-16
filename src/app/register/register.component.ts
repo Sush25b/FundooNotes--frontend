@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { MatSnackBar} from '@angular/material';
 import { Router } from '@angular/router';
 import { RegisterModel } from 'src/app/model/register.model';
 import { HttpService } from '../service/http.service';
@@ -13,7 +13,7 @@ import { HttpService } from '../service/http.service';
 export class RegisterComponent implements OnInit {
 
   
-  constructor(private router: Router, private formBuilder: FormBuilder,private http:HttpService) { }
+  constructor(private router: Router, private formBuilder: FormBuilder,private http:HttpService,private snackbar: MatSnackBar) { }
 
   user: RegisterModel = new RegisterModel();
 
@@ -70,8 +70,18 @@ export class RegisterComponent implements OnInit {
      //postrequest--->is the server Method 
     // to which api it should hit
     this.http.postRequest("/register",this.registerForm.value).subscribe(
-      (response) => {console.log("success",response)
-     this.router.navigateByUrl('/register')},     //redirect to same page   
+      (response) => {console.log("success",response);
+                      
+                      if (response.status === 200) 
+                      {
+                        this.snackbar.open(response.message, 'ok', { duration: 10000 });
+                      }
+                      else 
+                      {
+                        this.snackbar.open(response.message, 'try again', { duration: 10000 });
+                      };
+                      this.router.navigateByUrl('/login');
+                    },     //redirect to same page   
      (error)=> {console.log("error",error)}
     )
   }

@@ -37,7 +37,7 @@
                 <button mat-button  mat-icon-button>
                   <mat-icon>search</mat-icon>
                 </button>
-                <input matInput type="text" class="search-bar" placeholder="Search">
+                <input matInput type="text" class="search-bar" placeholder="Search" [ngClass]="search()" [(ngModel)]="searchterm"> 
             </div> 
 
             <div class="toolbarspace">
@@ -45,14 +45,24 @@
               <button mat-icon-button matTooltip="refresh" routerLink="/dashboard" style="margin-right: 10px">
                 <mat-icon >replay</mat-icon>
               </button>
+
+              <button mat-icon-button class="iconbtn" *ngIf="list" (click)="changeView()" fxShow="true" fxHide.lt-sm="true">
+                  <mat-icon class="icon">view_agenda</mat-icon>
+              </button>
+
+              <button mat-icon-button class="iconbtn" *ngIf="grid" (click)="changeView()" fxShow="true" fxHide.lt-sm="true">
+                  <!-- <img src="../../../assets/menu-grid.svg" style="width:20px; color: #6F6F6F;"> -->
+                  <mat-icon class="icon">view_module</mat-icon>
+              </button>
+
               
-              <button mat-icon-button matTooltip="list view" [matMenuTriggerFor]="menu" style="margin-right: 15px">
+              <!-- <button mat-icon-button matTooltip="list view" [matMenuTriggerFor]="menu" style="margin-right: 15px">
                 <mat-icon>list</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item>Item 1</button>
                 <button mat-menu-item>Item 2</button>
-              </mat-menu>
+              </mat-menu> -->
 
               <!-- [matMenuTriggerFor]="setting" -->
               <button mat-icon-button matTooltip="setting" style="margin-right: 10px">
@@ -63,17 +73,6 @@
 
             <div class="toolbarspace">
 
-                <button mat-icon-button class="iconbtn" *ngIf="list" (click)="changeView()" fxShow="true" fxHide.lt-sm="true">
-                      <mat-icon class="icon">view_agenda</mat-icon>
-                </button>
-
-                <button mat-icon-button class="iconbtn" *ngIf="grid" (click)="changeView()" fxShow="true" fxHide.lt-sm="true">
-                      <!-- <img src="../../../assets/menu-grid.svg" style="width:20px; color: #6F6F6F;"> -->
-                      <mat-icon class="icon">view_module</mat-icon>
-                </button>
-
-
-<<<<<<< HEAD
               <button mat-icon-button matTooltip="profile" [matMenuTriggerFor]="profile" >
                 <mat-icon>account_circle</mat-icon>
               </button>
@@ -82,15 +81,6 @@
                 <button mat-menu-item routerLink="profilepic">Profilepic</button>
                 <button mat-menu-item (click)="onLogout()">Logout</button>
               </mat-menu>
-=======
-              <button mat-icon-button matTooltip="profile" [matMenuTriggerFor]="profile">
-                <mat-icon>account_circle</mat-icon>
-              </button>
-              <mat-menu #profile="matMenu">
-                <button mat-menu-item (click)="onLogout()">Logout</button>
-              </mat-menu>
-
->>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
               
             </div>
         
@@ -107,11 +97,11 @@
                               <!-- <mat-button-toggle class="MB2">hiiiiiii</mat-button-toggle>
                                   <br> -->
                   <mat-button-toggle class="MB2" (click)="onNotes()"  routerLink="/dashboard">
-                    <mat-icon class="spacebetween">notes</mat-icon>Notes
+                    <mat-icon class="spacebetween">lightbulb_outline</mat-icon>Notes
                   </mat-button-toggle><br>
 
                   <mat-button-toggle class="MB3">
-                    <mat-icon class="spacebetween">announcement</mat-icon>Reminders
+                    <mat-icon class="spacebetween">notifications_none</mat-icon>Reminders
                   </mat-button-toggle><br>
 
                   <hr>
@@ -121,7 +111,7 @@
                   
                   <app-labels></app-labels>
               
-                  <mat-button-toggle class="MB4">
+                  <mat-button-toggle class="MB4" (click) = "editlabel()"> 
                     <mat-icon class="spacebetween">edit</mat-icon>Edit Label
                   </mat-button-toggle><br>
 
@@ -149,7 +139,7 @@
                   </div> -->
 
                   <div>
-                      <p>hiiiiiii</p>
+                      <!-- <p>hiiiiiii</p> -->
                     <!-- <app-note></app-note> --> 
                     
                     <!-- <app-dialogbox></app-dialogbox> -->

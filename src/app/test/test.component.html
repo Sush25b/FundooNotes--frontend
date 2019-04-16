@@ -1,3 +1,31 @@
 <p>
   test works!
 </p>
+
+<div>
+  <p>wdwdds</p>
+    <mat-card *ngIf="f===log">
+        Welcome back, friend.
+      
+    </mat-card>
+</div>
+  
+
+  <div *ngIf="isLoggedout===flag">
+    Please friend, login.
+  </div>
+
+<ng-container
+  *ngIf="f===log; then loggedIn; else loggedOut">
+</ng-container>
+
+
+  <div #loggedIn >
+      pinned
+  </div>
+
+<ng-template #loggedOut>
+  <div>
+    unpinned
+  </div>
+</ng-template>

@@ -20,13 +20,17 @@ export class GetnoteComponent implements OnInit {
 
     // data:any;
     userNote:any;
+    pinnedNote=[];
+    unpinnedNote=[];
     noteId:any;
     data:any;
     note:any;
 
   ngOnInit()
    {    this.getAllNotes();
-  }
+
+      
+   }
 
 //   openDilog(note:any)
 //   {
@@ -49,10 +53,43 @@ export class GetnoteComponent implements OnInit {
     this.http.getRequest("/note/getAlls"+"?trash=false&archive=false").subscribe(
 
       (response)=> {
-         console.log("sucessfully get notes",response),
+         console.log("sucessfully get notes",response);
        // this.data= response('body'),
         //console.log("data-->",this.data)
-        this.userNote =response;
+
+
+            //old
+             this.userNote =response;
+
+        //new
+        // for(var i=0;i<response.length;i++)
+        // {  
+        //     console.log(response.length);
+        //       if(response[i].pinned === true)
+        //       {
+        //           //this.Notepin.push(this.Note[i]);
+        //           console.log(response[i].pinned);
+        //           console.log(response[i]);
+        //           this.pinnedNote.push(response[i]);
+        //           break;
+        //       }
+        //        else{}
+        //  };
+        //  console.log(this.pinnedNote);
+
+        //  for(var i=0;i<response.length;i++)
+        // {  
+        //     console.log(response.length);
+        //       if(response[i].pinned === false)
+        //       {
+        //           //this.Notepin.push(this.Note[i]);
+        //           console.log(response[i].pinned);
+        //           this.unpinnedNote.push(response[i]);
+            
+        //       }
+        //        else{}
+        //  };
+        //  console.log(this.unpinnedNote);
 
       // if(response.body.status===402)
       // {

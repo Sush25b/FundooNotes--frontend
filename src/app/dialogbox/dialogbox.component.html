@@ -1,183 +1,379 @@
-<<<<<<< HEAD
 <!-- <div class="parentdiv"> -->
 <!-- fxLayoutgap="50px" -->
 
+
+<div style=" margin-left: 5%;">
+  <p>PINNED</p>
+</div>
+<div>
+   <!-- {{checkcondition()}} -->
+</div>
 <!-- these below div line===>is just a for loop, will not effect the flex-->
 <div fxLayout="{{direction}} wrap" fxLayoutAlign="space-around center">
-
   <!-- <div *ngIf="direction===row"> -->
-    <div *ngFor="let notes of Note">
-      <div>
-        <div style="  margin-top: 30px; margin-bottom: 30px;">
+    
+  <div style="" *ngFor="let notes of Note | filterNote:searchterm">
+    <div>
+      <!-- <div style="  margin-top: 30px; margin-bottom: 30px;"> -->
+      <div style=" margin-top: 6px; margin-bottom: 15px;">
+        <!-- <mat-card class="matpad" [ngStyle]="{ 'background-color': notes.color}"> -->
+        <mat-card *ngIf="notes.pinned===true" [ngClass]=" direction =='row' ? 'matpad':'matpad3' "
+          [ngStyle]="{ 'background-color': notes.color}">
 
-          <!-- <mat-card class="matpad" [ngStyle]="{ 'background-color': notes.color}"> -->
-          <mat-card [ngClass]=" direction =='row' ? 'matpad':'matpad3' " [ngStyle]="{ 'background-color': notes.color}">
-           
-            <div  style="  display: flex; flex-direction: row; justify-content: space-between;"  (click)="openDilog(notes)">
-                <!-- <input [(ngModel)]="notes.title"> -->
-                <div>
-                      <textarea style="border-width: inherit; margin-top: 12px;" matTextareaAutosize [(ngModel)]="notes.title"></textarea>
-                      <!-- <mat-icon style="font-size: 18px !important" (click)="onPin();">pin_drop</mat-icon>
+          <div style="  display: flex; flex-direction: row; justify-content: space-between;">
+            <!-- <input [(ngModel)]="notes.title"> -->
+            <div (click)="openDilog(notes)">
+              <textarea style="border-width: inherit; margin-top: 12px;" matTextareaAutosize [(ngModel)]="notes.title"
+                [ngStyle]="{ 'background-color': notes.color}"></textarea>
+              <!-- <mat-icon style="font-size: 18px !important" (click)="onPin();">pin_drop</mat-icon>
                                 </div ><br>
                                 <div> -->
-
-                </div>
-                <div >
-                    <button mat-icon-button matTooltip="Pin"  routerLink="/dashboard">
-                      <mat-icon style="margin-left: 15px; font-size: 18px !important" (click)="onPin(notes.noteId);">
-                        pin_drop</mat-icon>
-                    </button>
-                </div>
-            </div><br>
+            </div>
             <div>
-              <!-- <input [(ngModel)]="notes.description"> -->
-              <textarea style="border-width: inherit;" matTextareaAutosize [(ngModel)]="notes.description"></textarea>
-              <div>
+              <button mat-icon-button style="position: absolute; right: 0;margin-top: -18px"
+                (click)="onPin(notes.noteId)">
+                <!-- <mat-icon matTooltip="Pin note">location_on</mat-icon> -->
+                <mat-icon *ngIf="notes.pinned == false"><img src="../../../assets/pinBeforeClick.svg"></mat-icon>
+                <mat-icon *ngIf="notes.pinned"><img src="../../../assets/pinAfterClick(1).svg"></mat-icon>
+              </button>
+              <!-- <button mat-icon-button matTooltip="Pin" routerLink="/dashboard">
+                <mat-icon style="margin-left: 15px; font-size: 18px !important" (click)="onPin(notes.noteId);">
+                  place</mat-icon>
+              </button> -->
+            </div>
+
+          </div><br>
+
+          <div>
+            <!-- <input [(ngModel)]="notes.description"> -->
+            <textarea style="border-width: inherit;" matTextareaAutosize [(ngModel)]="notes.description"
+              [ngStyle]="{ 'background-color': notes.color}"></textarea>
+            <div>
+
+              <div style="margin-top: 12px;">
+                <mat-chip-list>
+                  <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
+                    {{lab.labelTitle}}
+                    <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
               </div>
 
-              <div class="maticonflex">
+              <div style="margin-top: 12px;">
+                <mat-chip-list>
+                  <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
+                    {{lab.labelTitle}}
+                    <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
 
-                <div>
-                  <button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="Reminder" routerLink="#">
-                    <mat-icon style="font-size: 17px !important">add_alert</mat-icon>
-                  </button>
-                </div>
+            <div class="maticonflex">
 
-                <div>
-                  <button mat-icon-button matTooltip="Collaborate" routerLink="/dashboard">
-                    <mat-icon style="font-size: 17px !important">group_add</mat-icon>
-                  </button>
-                </div>
-
-                <div>
-                  <button mat-icon-button matTooltip="Change Color" routerLink="/dashboard">
-                    <mat-icon style="font-size: 17px !important">color_lens</mat-icon>
-                  </button>
-                </div>
-
-                <div>
-                  <button mat-icon-button matTooltip="Add Image" routerLink="/dashboard">
-                    <mat-icon style="font-size: 17px !important">image</mat-icon>
-                  </button>
-                </div>
-
-                <div>
-                  <button mat-icon-button matTooltip="Archive" routerLink="/dashboard">
-                    <!-- <mat-icon style="font-size: 17px !important">archive</mat-icon> -->
-                    <mat-icon style="font-size: 17px !important" (click)="onArchive(notes.noteId);">archive</mat-icon>
-                  </button>
-                </div>
-
-                <div>
-                  <button mat-icon-button matTooltip="More Option" [matMenuTriggerFor]="MoreOption"
-                    routerLink="/dashboard">
-                    <mat-icon style="font-size: 17px !important">more_vert</mat-icon>
-                  </button>
-                </div>
-=======
-<div class="parentdiv">
-
-  <!-- these below div line===>is just a for loop, will not effect the flex-->
-  <div fxLayout="{{direction}} wrap" fxLayoutgap="50px" fxLayoutAlign="start center">
- 
-  <div *ngFor="let notes of Note">
-    <div>
-        <p>{{direction}}</p>
-      <div style="  margin-top: 30px; margin-bottom: 30px;">
-        <mat-card class="matpad2" [ngStyle]="{ 'background-color': notes.color}">
-    
-              <div (click) = "openDilog(notes)">
-                <!-- <input [(ngModel)]="notes.title"> -->
-                <textarea style="border-width: inherit;" matTextareaAutosize [(ngModel)]= "notes.title"></textarea>
-                <!-- <mat-icon style="font-size: 18px !important" (click)="onPin();">pin_drop</mat-icon>
-                        </div ><br>
-                        <div> -->
-
-                <button mat-icon-button matTooltip="Pin" routerLink="/dashboard">
-                  <mat-icon style="margin-left: 15px; font-size: 18px !important" (click)="onPin(notes.noteId);">
-                    pin_drop</mat-icon>
-                </button>
-
-              </div><br>
               <div>
-                <!-- <input [(ngModel)]="notes.description"> -->
-                <textarea style="border-width: inherit;" matTextareaAutosize [(ngModel)]= "notes.description"></textarea>
-                <div>
-              </div> 
-
-              <div class="maticonflex">
-
-                  <div>
-                    <button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="Reminder" routerLink="#">
-                      <mat-icon style="font-size: 17px !important">add_alert</mat-icon>
-                    </button>
-                  </div>
-
-                  <div>
-                    <button mat-icon-button matTooltip="Collaborate" routerLink="/dashboard">
-                      <mat-icon style="font-size: 17px !important">group_add</mat-icon>
-                    </button>
-                  </div>
-
-                  <div>
-                    <button mat-icon-button matTooltip="Change Color" routerLink="/dashboard">
-                      <mat-icon style="font-size: 17px !important">color_lens</mat-icon>
-                    </button>
-                  </div>
-
-                  <div>
-                    <button mat-icon-button matTooltip="Add Image" routerLink="/dashboard">
-                      <mat-icon style="font-size: 17px !important">image</mat-icon>
-                    </button>
-                  </div>
-
-                  <div>
-                    <button mat-icon-button matTooltip="Archive" routerLink="/dashboard">
-                      <!-- <mat-icon style="font-size: 17px !important">archive</mat-icon> -->
-                      <mat-icon style="font-size: 17px !important" (click)="onArchive(notes.noteId);">archive</mat-icon>
-                    </button>
-                  </div>
-
-                  <div>
-                    <button mat-icon-button matTooltip="More Option" [matMenuTriggerFor]="MoreOption"
-                      routerLink="/dashboard">
-                      <mat-icon style="font-size: 17px !important">more_vert</mat-icon>
-                    </button>
-                  </div>
->>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
-
+                <button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="Reminder" routerLink="#">
+                  <mat-icon style="font-size: 17px !important">add_alert</mat-icon>
+                </button>
               </div>
 
-              <!--When we click the mat-icon-button, a menu list is show using the  e.g [matMenuTriggerfor] -->
-              <mat-menu #Reminder="matMenu">
-                <button mat-menu-item style="height: 35px;">Later today 8:00 PM</button>
-                <button mat-menu-item style="height: 35px;">Tomorrow 8:00 PM</button>
-                <button mat-menu-item style="height: 35px;">Next week 8:00 PM</button>
-                <button mat-menu-item style="height: 35px;">Home Address</button>
-                <button mat-menu-item style="height: 35px;">Work Address</button>
-
-                <button mat-menu-item>
-                  <mat-form-field class="example-full-width">
-                    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-                    <mat-datepicker-toggle matSuffix [for]="picker">
-                      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
+              <div>
+                <button mat-icon-button matTooltip="Collaborate" >
+                  <mat-icon style="font-size: 17px !important">group_add</mat-icon>
                 </button>
-              </mat-menu>
+              </div>
 
-              <mat-menu #MoreOption="matMenu">
-                <!-- <button mat-menu-item style="height: 35px;">Delete note</button> -->
-                <button mat-menu-item style="height: 35px;" (click)="onTrash(notes.noteId);">Delete note</button>
-                <!-- <button mat-menu-item style="height: 35px;">Add label</button> -->
-                <button mat-menu-item style="height: 35px;">Add drawing</button>
-                <button mat-menu-item style="height: 35px;">Make a copy</button>
-                <button mat-menu-item style="height: 35px;">Show Checkboxes</button>
-<<<<<<< HEAD
+              <div>
+                <button mat-icon-button matTooltip="Change Color" [matMenuTriggerFor]="buttonMenu"
+                  routerLink="/dashboard">
+                  <mat-icon style="font-size: 17px !important">color_lens</mat-icon>
+                </button>
+              </div>
+
+              <div>
+                <button mat-icon-button matTooltip="Add Image" >
+                  <mat-icon style="font-size: 17px !important">image</mat-icon>
+                </button>
+              </div>
+
+              <div>
+                <button mat-icon-button matTooltip="Archive" >
+                  <!-- <mat-icon style="font-size: 17px !important">archive</mat-icon> -->
+                  <mat-icon style="font-size: 17px !important" (click)="onArchive(notes.noteId);">archive</mat-icon>
+                </button>
+              </div>
+
+              <div>
+                <button mat-icon-button matTooltip="More Option" [matMenuTriggerFor]="MoreOption">
+                  <mat-icon style="font-size: 17px !important">more_vert</mat-icon>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- dfdsfdsfdsfdfdsfdsfdsfdfdfdsfdsfsdfsdsdf -->
+
+          </div>
+   
+          <mat-menu #buttonMenu="matMenu" [overlapTrigger]="false">
+              <ng-template matMenuContent let-note="note">
+                <div fxLayout="row wrap" fxLayoutAlign="end
+                  center" fxFlex="95">
+                  <div *ngFor="let color of colorCode">
+                    <span *ngFor="let iteam of color">
+                      <button mat-icon-button [style.background-color]="iteam" (click)="setColorToTitle(iteam,notes)">
+                        <!-- <mat-icon style="font-size: 40px" class="colorIcons">fiber_manual_record</mat-icon> -->
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              </ng-template>
+          </mat-menu>
+
+            <!--When we click the mat-icon-button, a menu list is show using the  e.g [matMenuTriggerfor] -->
+            <mat-menu #Reminder="matMenu">
+              <button mat-menu-item style="height: 35px;">Later today 8:00 PM</button>
+              <button mat-menu-item style="height: 35px;">Tomorrow 8:00 PM</button>
+              <button mat-menu-item style="height: 35px;">Next week 8:00 PM</button>
+              <button mat-menu-item style="height: 35px;">Home Address</button>
+              <button mat-menu-item style="height: 35px;">Work Address</button>
+  
+              <button mat-menu-item>
+                <mat-form-field class="example-full-width">
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                  <mat-datepicker-toggle matSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                  </mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </button>
+            </mat-menu>
+  
+            <mat-menu #MoreOption="matMenu">
+              <!-- <button mat-menu-item style="height: 35px;">Delete note</button> -->
+              <button mat-menu-item style="height: 35px;" (click)="onTrash(notes.noteId);">Delete note</button>
+              <!-- <button mat-menu-item style="height: 35px;">Add label</button> -->
+              <button mat-menu-item style="height: 35px;">Add drawing</button>
+              <button mat-menu-item style="height: 35px;" [matMenuTriggerFor]="label">add Label</button>
+              <button mat-menu-item style="height: 35px;">Make a copy</button>
+              <button mat-menu-item style="height: 35px;">Show Checkboxes</button>
+            </mat-menu>
+            <mat-menu #label="matMenu">
+              <mat-card (click)=$event.stopPropagation()>
+              <h5 style="margin-bottom: 5px">Label note</h5>
+              <input style="border: none;height: 31px;" placeholder="enter label name" type="text"
+              [(ngModel)]="labelTitle">
+              <button mat-icon-button >
+              <mat-icon  style="font-size: 20px " matTooltip="More">done</mat-icon>
+              </button>
+              <div style="margin: 5px" *ngFor = "let lab of labels">
+              <mat-checkbox (click) = "addLabel(notes.noteId,lab)">{{lab.labelTitle}}</mat-checkbox>
+              </div>
+              </mat-card>
+              
               </mat-menu>
-=======
-              </mat-menu>
-       
-    
->>>>>>> 1abad953c8f136bfc394185eeb5cad82501ba8e2
+        </mat-card>
+
+      </div>
+
+
+    </div>
+  </div><br>
+
+</div>
+<!-- ********************************************************************************************-->
+<div style=" margin-left: 5%; margin-top: 20px;">
+  <p>OTHERS</p>
+</div>
+<div fxLayout="{{direction}} wrap" fxLayoutAlign="space-around center">
+  <div style="" *ngFor="let notes of Note | filterNote:searchterm">
+
+    <div style="  margin-top: 8px; margin-bottom: 8px;">
+
+      <!-- <mat-card class="matpad" [ngStyle]="{ 'background-color': notes.color}"> -->
+      <div>
+        <mat-card *ngIf="notes.pinned===false" [ngClass]=" direction =='row' ? 'matpad':'matpad3' "
+          [ngStyle]="{ 'background-color': notes.color}">
+
+          <div style="  display: flex; flex-direction: row; justify-content: space-between;">
+            <!-- <input [(ngModel)]="notes.title"> -->
+            <div (click)="openDilog(notes)">
+              <textarea style="border-width: inherit; margin-top: 12px;" matTextareaAutosize [(ngModel)]="notes.title"
+                [ngStyle]="{ 'background-color': notes.color}"></textarea>
+              <!-- <mat-icon style="font-size: 18px !important" (click)="onPin();">pin_drop</mat-icon>
+                                </div ><br>
+                                <div> -->
+            </div>
+            <div>
+              <button mat-icon-button style="position: absolute; right: 0;margin-top: -18px"
+                (click)="onPin(notes.noteId)">
+                <!-- <mat-icon matTooltip="Pin note">location_on</mat-icon> -->
+                <mat-icon *ngIf="notes.pinned == false"><img src="../../../assets/pinBeforeClick.svg"></mat-icon>
+                <mat-icon *ngIf="notes.pinned"><img src="../../../assets/pinAfterClick(1).svg"></mat-icon>
+              </button>
+              <!-- <button mat-icon-button matTooltip="Pin">
+                <mat-icon style="margin-left: 15px; font-size: 18px !important" (click)="onPin(notes.noteId);">
+                  place</mat-icon>
+              </button> -->
+            </div>
+
+          </div><br>
+
+          <div>
+            <!-- <input [(ngModel)]="notes.description"> -->
+            <textarea style="border-width: inherit;" matTextareaAutosize [(ngModel)]="notes.description"
+              [ngStyle]="{ 'background-color': notes.color}"></textarea>
+            <div>
+
+              <div style="margin-top: 12px;">
+                <mat-chip-list>
+                  <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
+                    {{lab.labelTitle}}
+                    <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+
+              <div style="margin-top: 12px;">
+                <mat-chip-list>
+                  <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
+                    {{lab.labelTitle}}
+                    <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+            </div>
+
+            <div class="maticonflex">
+
+              <div>
+                <button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="Reminder2" >
+                  <mat-icon style="font-size: 17px !important">add_alert</mat-icon>
+                </button>
+              </div>
+
+              <div>
+                <button mat-icon-button matTooltip="Collaborate" >
+                  <mat-icon style="font-size: 17px !important">group_add</mat-icon>
+                </button>
+              </div>
+
+              <div>
+                <button mat-icon-button matTooltip="Change Color" [matMenuTriggerFor]="buttonMenu2">
+                  <mat-icon style="font-size: 17px !important">color_lens</mat-icon>
+                </button>
+              </div>
+
+              <div>
+                <button mat-icon-button matTooltip="Add Image" >
+                  <mat-icon style="font-size: 17px !important">image</mat-icon>
+                </button>
+              </div>
+
+              <div>
+                <button mat-icon-button matTooltip="Archive" >
+                  <!-- <mat-icon style="font-size: 17px !important">archive</mat-icon> -->
+                  <mat-icon style="font-size: 17px !important" (click)="onArchive(notes.noteId);">archive</mat-icon>
+                </button>
+              </div>
+
+              <div>
+                <button mat-icon-button matTooltip="More Option" [matMenuTriggerFor]="MoreOption2">
+                  <mat-icon style="font-size: 17px !important">more_vert</mat-icon>
+                </button>
+              </div>
+
+            </div>
+
+            <!-- dfdsfdsfdsfdfdsfdsfdsfdfdfdsfdsfsdfsdsdf -->
+
+          </div>
+
+          <mat-menu #buttonMenu2="matMenu" [overlapTrigger]="false">
+            <ng-template matMenuContent let-note="note">
+              <div fxLayout="row wrap" fxLayoutAlign="end
+                center" fxFlex="95">
+                <div *ngFor="let color of colorCode">
+                  <span *ngFor="let iteam of color">
+                    <button mat-icon-button [style.background-color]="iteam" (click)="setColorToTitle(iteam,notes)">
+                      <!-- <mat-icon style="font-size: 40px" class="colorIcons">fiber_manual_record</mat-icon> -->
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </ng-template>
+          </mat-menu>
+
+          <!-- <mat-menu [overlapTrigger]="false" #buttonMenu3="matMenu">
+            <button matTooltip="Yellow" (click)="setColorToTitle('#fcf476',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#fcf476"></button>
+            <button matTooltip="Orange" (click)="setColorToTitle('#f8bc04',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#f8bc04 "></button>
+            <button matTooltip="Red" (click)="setColorToTitle('#f28b82',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#f28b82 "></button>
+            <button matTooltip="White" (click)="setColorToTitle('#ffffff',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#ffffff "></button>
+            <br />
+            <button matTooltip="Dark blue" (click)="setColorToTitle('#aecbfa',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#aecbfa "></button>
+            <button matTooltip="Blue" (click)="setColorToTitle('#cbf0f8',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#cbf0f8 "></button>
+            <button matTooltip="Teal" (click)="setColorToTitle('#a7ffea',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#a7ffea "></button>
+            <button matTooltip="Green" (click)="setColorToTitle('#ccff90',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#ccff90 "></button>
+            <br />
+            <button matTooltip="Gray" (click)="setColorToTitle('#e8eaed',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#e8eaed "></button>
+            <button matTooltip="Brown" (click)="setColorToTitle('#e6c9a8',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#e6c9a8 "></button>
+            <button matTooltip="Pink" (click)="setColorToTitle('#fccfe8',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#fccfe8 "></button>
+            <button matTooltip="Purple" (click)="setColorToTitle('#d7aefb',notes)" mat-mini-fab class="colorlens"
+              style="background-color:#d7aefb "></button>
+          </mat-menu> -->
+
+          <!--When we click the mat-icon-button, a menu list is show using the  e.g [matMenuTriggerfor] -->
+          <mat-menu #Reminder2="matMenu">
+            <button mat-menu-item style="height: 35px;">Later today 8:00 PM</button>
+            <button mat-menu-item style="height: 35px;">Tomorrow 8:00 PM</button>
+            <button mat-menu-item style="height: 35px;">Next week 8:00 PM</button>
+            <button mat-menu-item style="height: 35px;">Home Address</button>
+            <button mat-menu-item style="height: 35px;">Work Address</button>
+
+            <button mat-menu-item>
+              <mat-form-field class="example-full-width">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                <mat-datepicker-toggle matSuffix [for]="picker">
+                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </button>
+          </mat-menu>
+
+          <mat-menu #MoreOption2="matMenu">
+            <!-- <button mat-menu-item style="height: 35px;">Delete note</button> -->
+            <button mat-menu-item style="height: 35px;" (click)="onTrash(notes.noteId);">Delete note</button>
+            <!-- <button mat-menu-item style="height: 35px;">Add label</button> -->
+            <button mat-menu-item style="height: 35px;">Add drawing</button>
+            <button mat-menu-item style="height: 35px;">Make a copy</button>
+            <button mat-menu-item style="height: 35px;">Show Checkboxes</button>
+          </mat-menu>
+        </mat-card>
+        <div *ngIf="notes.pinned===true"></div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  
+
+
+</div>

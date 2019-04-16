@@ -17,6 +17,7 @@ import { Token } from '@angular/compiler';
 @Injectable()
 export class LoginComponent implements OnInit
 {
+  hide = true;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
