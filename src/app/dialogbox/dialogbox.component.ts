@@ -40,7 +40,8 @@ export class DialogboxComponent implements OnInit {
   [['white','lightGreen','purple','red'],
   ['orange','teal','pink','darkBlue'],['blue','brown','yellow','gray']];
 
-  
+  labelTitle:any;
+
   @Input()
   Note:[];
 
@@ -235,5 +236,27 @@ export class DialogboxComponent implements OnInit {
         console.log(data)
       }
     )
+  }
+
+  addLabelToNote(noteid:any){
+    console.log(noteid)
+    console.log(this.labelTitle)
+    this.http.postReq("/label/labelToNote?labelTitle="+this.labelTitle+"&noteId="+noteid).subscribe(
+      data =>{
+        console.log(data)
+      }
+    )
+  }
+
+  removeLabel(noteid:any,labelid:any)
+  { 
+    console.log(noteid+" "+labelid)
+    this.http.postReq("/label/deleteLabelNote?noteId="+noteid+"&labelId="+labelid).subscribe(
+      data =>{
+        console.log(data)
+      }
+    );
+
+    setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 500 );
   }
 }

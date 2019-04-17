@@ -1,4 +1,4 @@
-//-----------Old wrong file-------------
+//-----------these component is to receive data from  DataService--> by subscibing it in ngOnInit and inject data in dialogbox
 
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../service/http.service';

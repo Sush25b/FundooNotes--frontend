@@ -1,4 +1,6 @@
-//  =============== New File Original--used to load in Dashboard=============
+//  =============== New File Original--used to load in Dashboard--->  matside nav=============
+
+// <!-- and from here only we r we r sending particular notes of a label to DataService -->
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../service/http.service';
 import { MatSnackBar} from '@angular/material';
@@ -36,7 +38,7 @@ export class LabelsComponent implements OnInit {
 
   getLabel()
   {
-    this.http.getRequest("/label/getAlls",).subscribe(
+    this.http.getRequest("/label/getAlls").subscribe(
 
       (response)=> {
 

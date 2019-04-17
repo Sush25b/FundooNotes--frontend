@@ -8,19 +8,27 @@ import {HttpService } from 'src/app/service/http.service';
 })
 export class EditlabelComponent implements OnInit {
 
-  constructor(
-  @Inject(MAT_DIALOG_DATA) private data: { label: any },private http:HttpService) 
+  constructor
+  (
+          @Inject(MAT_DIALOG_DATA) private data: { label: any }
+          ,private http:HttpService
+  ) 
   { }
-  labels = this.data.label;
+
+  getlabels = this.data.label;
+
   createlabel:any;
-  ngOnInit() {
+
+  ngOnInit()
+  {
   }
 
-  create(){
-this.http.postReq("/label/labelcreate?labelTitle="+this.createlabel).subscribe(
-  data=>{
-    console.log(data)
-  }
-)
-  }
+  create()
+   {
+      this.http.postReq("/label/labelcreate?labelTitle="+this.createlabel).subscribe(
+        data=>{
+          console.log(data)
+        }
+      )
+   }
 }

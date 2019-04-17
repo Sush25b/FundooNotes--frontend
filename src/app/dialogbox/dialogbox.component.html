@@ -55,12 +55,12 @@
                   <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
                     (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
                     {{lab.labelTitle}}
-                    <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                    <mat-icon matChipRemove (click)="removeLabel(notes.noteId,lab.labelId)">cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
               </div>
 
-              <div style="margin-top: 12px;">
+              <!-- <div style="margin-top: 12px;">
                 <mat-chip-list>
                   <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
                     (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
@@ -68,7 +68,7 @@
                     <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
-              </div>
+              </div> -->
             </div>
 
             <div class="maticonflex">
@@ -162,18 +162,17 @@
             </mat-menu>
             <mat-menu #label="matMenu">
               <mat-card (click)=$event.stopPropagation()>
-              <h5 style="margin-bottom: 5px">Label note</h5>
-              <input style="border: none;height: 31px;" placeholder="enter label name" type="text"
-              [(ngModel)]="labelTitle">
-              <button mat-icon-button >
-              <mat-icon  style="font-size: 20px " matTooltip="More">done</mat-icon>
-              </button>
-              <div style="margin: 5px" *ngFor = "let lab of labels">
-              <mat-checkbox (click) = "addLabel(notes.noteId,lab)">{{lab.labelTitle}}</mat-checkbox>
-              </div>
-              </mat-card>
-              
-              </mat-menu>
+                      <h5 style="margin-bottom: 5px">Label note</h5>
+                      <input style="border: none;height: 31px;" placeholder="enter label name" type="text"
+                                  [(ngModel)]="labelTitle">
+                          <button mat-icon-button >
+                                    <mat-icon  style="font-size: 20px " matTooltip="More" (click) = "addLabelToNote(notes.noteId)">done</mat-icon>
+                          </button>
+                      <div style="margin: 5px" *ngFor = "let lab of labels">
+                          <mat-checkbox (click) = "addLabel(notes.noteId,lab)">{{lab.labelTitle}}</mat-checkbox>
+                      </div>
+              </mat-card> 
+            </mat-menu>
         </mat-card>
 
       </div>
@@ -229,10 +228,10 @@
 
               <div style="margin-top: 12px;">
                 <mat-chip-list>
-                  <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
+                  <mat-chip *ngIf="notes.reminder!=null"  [selectable]="selectable" [removable]="removable"
                     (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
-                    {{lab.labelTitle}}
-                    <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                    {{notes.reminder}}
+                    <mat-icon matChipRemove >cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
               </div>
@@ -242,7 +241,7 @@
                   <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
                     (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
                     {{lab.labelTitle}}
-                    <mat-icon matChipRemove (click)="removeLabel(note.noteId,lab.labelId)">cancel</mat-icon>
+                    <mat-icon matChipRemove (click)="removeLabel(notes.noteId,lab.labelId)">cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
               </div>
