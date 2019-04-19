@@ -1,55 +1,53 @@
 
-<div style="display: flex;
-flex-direction: row;
-justify-content: center;">
+<div style="display: flex; flex-direction: column; justify-content: center;">
   <div>
   <mat-card style="height: fit-content; width: fit-content;">
 
     <mat-card-content [fxLayout]="'column'" fxFlex="500px">
 
-      <!-- <div [fxLayout]="'column'">
-        <button fxLayoutAlign="center center" mat-button type="button">Save</button>
-      </div> -->
-      <div *ngIf="changingImage" [fxLayout]="'column'">
+      <!-- <div *ngIf="changingImage" [fxLayout]="'column'"> -->
+      <div>  
           <h3>User profile</h3>
-          <div fxFlex="100" [fxLayout]="'row'">
-            <!-- inside div1-->
-            <div [fxLayout]="'column'">
-               <img fxLayoutAlign="center center" [src]="data && data.image ? data.image :  'http://placehold.it/128x128'"
-                class="profile-img">    
-                           
-              <button fxLayoutAlign="center center" mat-button type="button" (click)="changingProfileImage()">Change Image</button>
-            </div>
-
-            <!-- inside div2-->
-            <!-- <div [fxLayout]="'column'">
-                <div style="margin-left: 27px;">
-                   
-                    <mat-form-field >
-                        <mat-label>Email</mat-label>
-                        <input matInput placeholder="email" formControlName="emailid">
-                    </mat-form-field>
-                </div>
-
-                <div style="margin-left: 27px;">
-                    
-                    <mat-form-field >
-                        <mat-label>Password</mat-label>
-                        <input type="password" matInput placeholder="password" formControlName="password">
-                    </mat-form-field><br>
-                </div>
-            </div> -->
-
-
-          </div>
       </div>
 
-      <div *ngIf="!changingImage" [fxLayout]="'column'">
-          <img-cropper [image]="data" [settings]="cropperSettings"></img-cropper><br>
+      <div fxFlex="70%" fxFlexFill>
+          <div fxLayout="row" fxLayoutAlign="center end" >
+              <input type="file" (change)="fileChangeEvent($event)" />
           
-         <button fxLayoutAlign="center center" mat-button type="button" (click)="saveNewImage(data.image)">Save Profile Pic</button>
-
+        
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 3"
+            [resizeToWidth]="128" format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+          </div>
+      </div> 
+    
+      <div fxLayout="row" fxLayoutAlign="space-around end" >
+          <button mat-raised-button  (click)="setProfile()">
+               Select-Profile
+          </button>
+        
+          <button mat-raised-button  mat-dialog-close style="margin-left: 10%;">cancel</button>
       </div>
+                <!-- <div fxFlex="100" [fxLayout]="'row'">
+                        <div [fxLayout]="'column'">
+                          <img fxLayoutAlign="center center" [src]="data && data.image ? data.image :  'http://placehold.it/128x128'"
+                            class="profile-img">    
+                                      
+                          <button fxLayoutAlign="center center" mat-button type="button" (click)="changingProfileImage()">Change Image</button>
+                        </div>
+                      </div>
+                    
+                      <div *ngIf="!changingImage" [fxLayout]="'column'">
+                            <img-cropper [image]="data" [settings]="cropperSettings"></img-cropper><br>
+          
+                            <button fxLayoutAlign="center center" mat-button type="button" (click)="saveNewImage(data.image)">Save Profile Pic</button>
+
+                      </div>-->
+
+
+      
     </mat-card-content>
 
   </mat-card>

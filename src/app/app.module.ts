@@ -25,9 +25,10 @@ import { EditnoteComponent } from './editnote/editnote.component';
 import { LabelComponent } from './label/label.component';
 import { LabelsComponent } from './labels/labels.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
-import {     ImageCropperComponent } from 'ng2-img-cropper';
+import { ImageCropperComponent } from 'ng2-img-cropper';
 import { SearchPipe } from './pipes/search.pipe';
 import { EditlabelComponent } from './editlabel/editlabel.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { EditlabelComponent } from './editlabel/editlabel.component';
     MatTooltipModule,
 
     // RouterModule,
-    RouterModule.forRoot([{path:'',component:AddNoteComponent}])
+    RouterModule.forRoot([{path:'',component:AddNoteComponent}]),
+    ImageCropperModule
   ],
   exports: [
    // HttpClient

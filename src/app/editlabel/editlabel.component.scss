@@ -1,24 +1,29 @@
 .input{
-    outline: none;
-    border: none;
-    //height: 35px;
-    font-size: medium;
-    }
-    .icon{
-    font-size: 18px;
-    }
-    .subdiv{
-    width: -webkit-fill-available;
-    height: 35px;
-    margin: 5px;
-    }
-    .createinput{
-    width: 226px;
-    outline: none;
-    border: none;
-    //height: 35px;
-    font-size: medium;
-    }
-    .createlabeldiv{
-    height: 36px;
-    }
+outline: none;
+border: none;
+//height: 35px;
+font-size: medium;
+}
+
+.icon{
+font-size: 18px;
+margin-right: 6px;
+}
+
+.subdiv{
+width: -webkit-fill-available;
+height: 27px;
+margin: 5px;
+}
+
+.createinput{
+width: 226px;
+outline: none;
+border: none;
+//height: 35px;
+font-size: medium;
+}
+
+.createlabeldiv{
+height: 36px;
+}

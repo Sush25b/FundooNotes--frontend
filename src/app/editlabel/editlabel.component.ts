@@ -31,4 +31,13 @@ export class EditlabelComponent implements OnInit {
         }
       )
    }
+
+   deletelabel(labelId)
+   {
+    this.http.deleteReq("/label/deleteLabel?labelId="+labelId).subscribe(
+      data=>{
+        console.log(data)
+      }
+    )
+   }
 }

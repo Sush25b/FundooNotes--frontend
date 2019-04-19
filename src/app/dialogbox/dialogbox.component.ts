@@ -119,6 +119,12 @@ export class DialogboxComponent implements OnInit {
         //  console.log(this.unpinnedNote);
 
   }
+
+  profileselect()
+  {
+    
+  }
+
   openDilog(note:any)
   {
     const dialogConfig = new  MatDialogConfig();
@@ -251,7 +257,7 @@ export class DialogboxComponent implements OnInit {
   removeLabel(noteid:any,labelid:any)
   { 
     console.log(noteid+" "+labelid)
-    this.http.postReq("/label/deleteLabelNote?noteId="+noteid+"&labelId="+labelid).subscribe(
+    this.http.deleteReq("/label/deleteLabelNote?noteId="+noteid+"&labelId="+labelid).subscribe(
       data =>{
         console.log(data)
       }

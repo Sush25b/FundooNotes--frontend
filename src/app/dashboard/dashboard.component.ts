@@ -10,7 +10,8 @@ import { ViewserviceService} from 'src/app/service/viewservice.service';
 import { SearchService } from 'src/app/service/search.service';
 import { EditlabelComponent } from '../editlabel/editlabel.component';
 import {MatDialog,MatDialogConfig} from '@angular/material';
-
+import { UserprofileComponent } from 'src/app/userprofile/userprofile.component';
+ 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -82,6 +83,40 @@ export class DashboardComponent implements OnInit
           // viewservice===> is the service.ts file to change the entity(direction) here
           this.viewservice.gridview();
   }
+
+
+  profileselect()
+  {
+    const dialogConfig =    this.dialog.open(UserprofileComponent,{
+                              width: '400px',
+                              height:'500px'
+                            });
+  
+    // dialogConfig.disableClose = false;
+    // dialogConfig.autoFocus = true;
+    // dialogConfig.width = '600px';
+    // dialogConfig.height = '200px';
+    // dialogConfig.direction= 'ltr';
+ 
+    console.log("$$$$$$")
+
+
+    dialogConfig.afterClosed().subscribe(
+      (x:any) =>
+      {
+        if(x!=null)
+        { 
+          console.log("hjkjhkjh",x.file)
+          this.http.uploadProfileImage('/user/profileupload',x.file).subscribe(
+          value =>
+          {
+            console.log(value);
+          }
+        );
+        }
+})
+  }
+
 
   loadNotes()
   {

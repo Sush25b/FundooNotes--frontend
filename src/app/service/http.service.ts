@@ -31,11 +31,29 @@ export class HttpService {
   }
 
 
+  public uploadProfileImage(url,file: File): Observable<any>
+  {
+    console.log("1111111111111111111"+localStorage.getItem('token'));
+    let formdata: FormData =new FormData();
+    formdata.append('File',file);
+    //,observe:'response'
+    return this.http.put(this.baseUrl + url,formdata,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token')),observe:'response'}
+    )
+  }
+
   public postReq(url): Observable<any>
   {
     console.log("1111111111111111111"+localStorage.getItem('token'));
     //,observe:'response'
     return this.http.post(this.baseUrl + url,"",{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
+    )
+  }
+
+  public deleteReq(url): Observable<any>
+  {
+    console.log("1111111111111111111"+localStorage.getItem('token'));
+    //,observe:'response'
+    return this.http.delete(this.baseUrl + url,{headers:new HttpHeaders().set("jwtToken",localStorage.getItem('token'))}
     )
   }
 

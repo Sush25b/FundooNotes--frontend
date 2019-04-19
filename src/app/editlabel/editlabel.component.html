@@ -1,18 +1,21 @@
 <div>
   <mat-card>
-  <h4>Edit labels</h4>
-  <div class = "createlabeldiv">
-  <input class = "createinput" type="text" placeholder="Create Label" [(ngModel)] = createlabel > <button mat-icon-button ><mat-icon class="icon" (click) = "create()">done</mat-icon></button>
-  </div>
-  <div class = "subdiv" *ngFor="let label of getlabels">
-  <mat-icon class="icon">label</mat-icon> <input class="input" type="text" [(ngModel)]=label.labelTitle (click) = "labelData(label)" >
-  <mat-icon class="icon">edit</mat-icon>
-  </div>
-  
-  <div>
-  <button mat-button style ="margin-left: 185px;" (click) = "update()">Done</button>
-  
-  </div>
+    <h4>Edit labels</h4>
+    <div class="createlabeldiv">
+      <input class="createinput" type="text" placeholder="Create Label" [(ngModel)]=createlabel> <button
+        mat-icon-button>
+        <mat-icon class="icon" (click)="create()">done</mat-icon>
+      </button>
+    </div>
+    <div class="subdiv" *ngFor="let label of getlabels">
+      <mat-icon class="icon" (click)="deletelabel(label.labelId)">delete</mat-icon> 
+            <input class="input" type="text" [(ngModel)]=label.labelTitle (click)="labelData(label)">
+      <mat-icon class="icon">edit</mat-icon>
+    </div>
+
+    <div>
+      <button mat-button style="margin-left: 185px;" (click)="update()">Done</button>
+
+    </div>
   </mat-card>
-  </div>
-  
+</div>

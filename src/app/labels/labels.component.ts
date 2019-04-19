@@ -28,12 +28,12 @@ export class LabelsComponent implements OnInit {
   {
     this.getLabel();
     
-    this.data.currentMessage.subscribe(
+    // this.data.currentMessage.subscribe(
 
-      (message)=>{
-        this.message =message
-      }
-    )
+    //   (message)=>{
+    //     this.message =message
+    //   }
+    // )
   }
 
   getLabel()
