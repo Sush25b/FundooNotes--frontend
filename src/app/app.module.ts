@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { NoteComponent } from './note/note.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ArchiveComponent } from './archive/archive.component';
 import { DialogboxComponent } from './dialogbox/dialogbox.component';
 import { BinComponent } from './bin/bin.component';
@@ -29,6 +29,10 @@ import { ImageCropperComponent } from 'ng2-img-cropper';
 import { SearchPipe } from './pipes/search.pipe';
 import { EditlabelComponent } from './editlabel/editlabel.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { DatePipe } from '@angular/common';
+
+
 
 @NgModule({
   declarations: [
@@ -69,14 +73,16 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 
     // RouterModule,
     RouterModule.forRoot([{path:'',component:AddNoteComponent}]),
-    ImageCropperModule
+    ImageCropperModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
   ],
   exports: [
    // HttpClient
 
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
   entryComponents:[EditnoteComponent,EditlabelComponent]
 })

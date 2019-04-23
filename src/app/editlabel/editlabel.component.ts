@@ -13,6 +13,7 @@ export class EditlabelComponent implements OnInit {
           @Inject(MAT_DIALOG_DATA) private data: { label: any }
           ,private http:HttpService
   ) 
+  
   { }
 
   getlabels = this.data.label;

@@ -14,6 +14,7 @@ import { RowContext } from '@angular/cdk/table';
 import { AddNoteComponent } from 'src/app/add-note/add-note.component';
 import { CurrentnoteService } from '../service/currentnote.service';
 import { SearchService } from 'src/app/service/search.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dialogbox',
@@ -36,11 +37,21 @@ export class DialogboxComponent implements OnInit {
   Notepin:any;
   Noteunpin:any;
   labels:any;
+  dateTime:any;
+
+
   colorCode: string[][]= 
   [['white','lightGreen','purple','red'],
   ['orange','teal','pink','darkBlue'],['blue','brown','yellow','gray']];
 
   labelTitle:any;
+
+  opendate = false;
+  Date: any;
+  today = new Date();
+  tomorrow = new Date(this.today.setDate(this.today.getDate()+1));
+  nextweek = new Date (this.today.setDate(this.today.getDate()+6));
+
 
   @Input()
   Note:[];
@@ -51,7 +62,7 @@ export class DialogboxComponent implements OnInit {
   // @Input()
   unpinnedNote:[];
 
-  constructor(private searchS:SearchService,private CurrentnoteS: CurrentnoteService,private viewservice: ViewserviceService,private dialog :MatDialog,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
+  constructor(private searchS:SearchService,private CurrentnoteS: CurrentnoteService,private viewservice: ViewserviceService,private dialog :MatDialog,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar,private datepipe:DatePipe) { }
 
   ngOnInit() 
   {
@@ -235,23 +246,26 @@ export class DialogboxComponent implements OnInit {
 
   }
   addLabel(noteid:any,labelName:any){
-    console.log(noteid)
-    console.log(labelName)
+    console.log(noteid);
+    console.log(labelName);
     this.http.postReq("/label/labelToNote?labelTitle="+labelName.labelTitle+"&noteId="+noteid).subscribe(
       data =>{
         console.log(data)
       }
-    )
+    );
+    setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 500 );
   }
 
   addLabelToNote(noteid:any){
-    console.log(noteid)
-    console.log(this.labelTitle)
+    console.log(noteid);
+    console.log(this.labelTitle);
     this.http.postReq("/label/labelToNote?labelTitle="+this.labelTitle+"&noteId="+noteid).subscribe(
       data =>{
         console.log(data)
       }
-    )
+    );
+
+    setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 500 );
   }
 
   removeLabel(noteid:any,labelid:any)
@@ -265,4 +279,80 @@ export class DialogboxComponent implements OnInit {
 
     setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 500 );
   }
+
+  saveDateandTime(noteid: any) 
+  {
+    console.log(this.dateTime)
+    console.log(noteid)
+    this.http.postReq("/note/reminder?noteId=" + noteid + "&reminder=" + this.dateTime).subscribe(
+      data =>
+      {
+        console.log(data);
+      }
+    );
+
+    setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 500 );
+  }
+  
+  removeReminder(noteid: any) 
+  {
+    console.log(noteid);
+    this.http.deleteReq("/note/reminderdelete?noteId=" + noteid).subscribe(
+      data => {
+        console.log(data)
+      }
+    );
+    setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 500 );
+  }
+
+  todayRem(noteid: any) 
+  {
+    this.Date = this.datepipe.transform(this.today, "yyyy-MM-dd");
+    var gmt = this.Date + "T" + "08:00:00"
+    console.log('normal string-->' + gmt);
+    let newDate = new Date(gmt);
+    console.log('converted Date-->' + newDate)
+
+    console.log("tttttttttttt"+newDate)
+    this.http.postReq("/note/reminder?noteId=" + noteid + "&reminder=" + newDate).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 500 );
+  }
+
+  tomorrowRem(noteid:any)
+  {
+    console.log(this.tomorrow)
+    this.Date = this.datepipe.transform(this.tomorrow, "yyyy-MM-dd");
+    var gmt = this.Date + "T" + "08:00:00"
+    console.log('normal string-->' + gmt);
+    let newDate = new Date(gmt);
+    console.log('converted Date-->' + newDate)
+    this.http.postReq("/note/reminder?noteId=" + noteid + "&reminder=" + newDate).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+
+    setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 500 );
+  }
+
+  nextWeek(noteid:any)
+  {
+    console.log(this.nextweek)
+    this.Date = this.datepipe.transform(this.nextweek, "yyyy-MM-dd");
+    var gmt = this.Date + "T" + "08:00:00"
+    console.log('normal string-->' + gmt);
+    let newDate = new Date(gmt);
+    console.log('converted Date-->' + newDate)
+    this.http.postReq("/note/reminder?noteId=" + noteid + "&reminder=" + newDate).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    setTimeout(  ()=>{ this.CurrentnoteS.getAllNotes(); }, 500 );
+  }
+
 }

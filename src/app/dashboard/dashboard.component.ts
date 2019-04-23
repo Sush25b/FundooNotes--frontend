@@ -39,6 +39,8 @@ export class DashboardComponent implements OnInit
   labels:any;
   labelTitle:String;
 
+  profilePic:any;
+
   ngOnInit() 
   {
     this.viewservice.getView().subscribe(
@@ -56,8 +58,14 @@ export class DashboardComponent implements OnInit
     this.searchS.changeMessage(this.searchterm);
 
    this.getAllLabels();
-   
 
+   this.getImage();
+
+  }
+
+  getImage(){
+    this.profilePic=localStorage.getItem("token");
+    console.log(this.profilePic);
   }
   
   search()
@@ -88,8 +96,8 @@ export class DashboardComponent implements OnInit
   profileselect()
   {
     const dialogConfig =    this.dialog.open(UserprofileComponent,{
-                              width: '400px',
-                              height:'500px'
+                             // width: '400px',
+                            //  height:'500px'
                             });
   
     // dialogConfig.disableClose = false;
@@ -207,7 +215,6 @@ export class DashboardComponent implements OnInit
 
     const dialogConfig = new  MatDialogConfig();
  
-
     dialogConfig.data = {
                  label:this.labels            
                         }
@@ -215,8 +222,6 @@ export class DashboardComponent implements OnInit
     dialogConfig.autoFocus = true;
     console.log(this.labels);
     this.dialog.open(EditlabelComponent,dialogConfig)
-    
-
   }
 
   getAllLabels(){

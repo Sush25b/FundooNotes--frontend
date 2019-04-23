@@ -22,7 +22,7 @@
 
           <div style="  display: flex; flex-direction: row; justify-content: space-between;">
             <!-- <input [(ngModel)]="notes.title"> -->
-            <div (click)="openDilog(notes)">
+            <div (click)="d(notes)">
               <textarea style="border-width: inherit; margin-top: 12px;" matTextareaAutosize [(ngModel)]="notes.title"
                 [ngStyle]="{ 'background-color': notes.color}"></textarea>
               <!-- <mat-icon style="font-size: 18px !important" (click)="onPin();">pin_drop</mat-icon>
@@ -52,9 +52,19 @@
 
               <div style="margin-top: 12px;">
                 <mat-chip-list>
-                  <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
+                  <mat-chip *ngIf="notes.reminder!=null"  [selectable]="selectable" [removable]="removable"
                     (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
-                    {{lab.labelTitle}}
+                    {{notes.reminder}}
+                    <mat-icon matChipRemove (click)="removeReminder(notes.noteId)">cancel</mat-icon>
+                  </mat-chip>
+                </mat-chip-list>
+              </div>
+
+              <div style="margin-top: 12px;">
+                <mat-chip-list>
+                  <mat-chip *ngFor="let lab of notes.label " [selectable]="selectable" [removable]="removable"
+                                           (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
+                        {{lab.labelTitle}}
                     <mat-icon matChipRemove (click)="removeLabel(notes.noteId,lab.labelId)">cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
@@ -74,7 +84,7 @@
             <div class="maticonflex">
 
               <div>
-                <button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="Reminder" routerLink="#">
+                <button mat-icon-button matTooltip="Reminder" [matMenuTriggerFor]="Reminder" >
                   <mat-icon style="font-size: 17px !important">add_alert</mat-icon>
                 </button>
               </div>
@@ -117,6 +127,7 @@
 
           </div>
    
+    <!-- 1st mat menu-->
           <mat-menu #buttonMenu="matMenu" [overlapTrigger]="false">
               <ng-template matMenuContent let-note="note">
                 <div fxLayout="row wrap" fxLayoutAlign="end
@@ -132,15 +143,28 @@
               </ng-template>
           </mat-menu>
 
+     <!-- 2nd mat menu-->
             <!--When we click the mat-icon-button, a menu list is show using the  e.g [matMenuTriggerfor] -->
             <mat-menu #Reminder="matMenu">
-              <button mat-menu-item style="height: 35px;">Later today 8:00 PM</button>
-              <button mat-menu-item style="height: 35px;">Tomorrow 8:00 PM</button>
-              <button mat-menu-item style="height: 35px;">Next week 8:00 PM</button>
-              <button mat-menu-item style="height: 35px;">Home Address</button>
-              <button mat-menu-item style="height: 35px;">Work Address</button>
+              <mat-card>
+              <button mat-menu-item style="height: 35px;" (click)="todayRem(notes.noteId)">today 8:00 PM</button>
+              <button mat-menu-item style="height: 35px;" (click)="tomorrowRem(notes.noteId)">Tomorrow 8:00 PM</button>
+              <button mat-menu-item style="height: 35px;" (click)="nextWeek(notes.noteId)">Next week 8:00 PM</button>
   
-              <button mat-menu-item>
+              <div class="dataandtime">
+
+                  <label class="datelabel">
+                    <div style="width: 205px;">
+                      <mat-icon style="font-size: large;">query_builder</mat-icon>
+                      <input class="date" placeholder="Pick Date & Time " [(ngModel)]="dateTime"
+                        [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+                      <owl-date-time #dt></owl-date-time>
+                    </div>
+                  </label>
+                  <button style="margin-left: 140px;" mat-button
+                    (click)="saveDateandTime(notes.noteId)">save</button>
+              </div>
+              <!-- <button mat-menu-item>
                 <mat-form-field class="example-full-width">
                   <input matInput [matDatepicker]="picker" placeholder="Choose a date">
                   <mat-datepicker-toggle matSuffix [for]="picker">
@@ -148,9 +172,11 @@
                   </mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-              </button>
+              </button> -->
+             </mat-card>
             </mat-menu>
   
+     <!-- 3rd mat menu-->
             <mat-menu #MoreOption="matMenu">
               <!-- <button mat-menu-item style="height: 35px;">Delete note</button> -->
               <button mat-menu-item style="height: 35px;" (click)="onTrash(notes.noteId);">Delete note</button>
@@ -160,6 +186,8 @@
               <button mat-menu-item style="height: 35px;">Make a copy</button>
               <button mat-menu-item style="height: 35px;">Show Checkboxes</button>
             </mat-menu>
+
+     <!-- 4th mat menu-->
             <mat-menu #label="matMenu">
               <mat-card (click)=$event.stopPropagation()>
                       <h5 style="margin-bottom: 5px">Label note</h5>
@@ -231,7 +259,7 @@
                   <mat-chip *ngIf="notes.reminder!=null"  [selectable]="selectable" [removable]="removable"
                     (removed)="remove(lab)" [ngStyle]="{ 'background-color': notes.color}">
                     {{notes.reminder}}
-                    <mat-icon matChipRemove >cancel</mat-icon>
+                    <mat-icon matChipRemove (click)="removeReminder(notes.noteId)">cancel</mat-icon>
                   </mat-chip>
                 </mat-chip-list>
               </div>
@@ -292,6 +320,7 @@
 
           </div>
 
+    <!-- 1st mat menu-->
           <mat-menu #buttonMenu2="matMenu" [overlapTrigger]="false">
             <ng-template matMenuContent let-note="note">
               <div fxLayout="row wrap" fxLayoutAlign="end
@@ -305,6 +334,56 @@
                 </div>
               </div>
             </ng-template>
+          </mat-menu>
+
+    <!-- 2nd mat menu-->
+            <!--When we click the mat-icon-button, a menu list is show using the  e.g [matMenuTriggerfor] -->
+            <mat-menu #Reminder2="matMenu">
+              <mat-card>
+              <button mat-menu-item style="height: 35px;" (click)="todayRem(notes.noteId)">today 8:00 PM</button>
+              <button mat-menu-item style="height: 35px;" (click)="tomorrowRem(notes.noteId)">Tomorrow 8:00 PM</button>
+              <button mat-menu-item style="height: 35px;" (click)="nextWeek(notes.noteId)">Next week 8:00 PM</button>
+  
+              <div class="dataandtime">
+
+                  <label class="datelabel">
+                    <div style="width: 205px;">
+                      <mat-icon style="font-size: large;">query_builder</mat-icon>
+                      <input class="date" placeholder="Pick Date & Time " [(ngModel)]="dateTime"
+                        [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+                      <owl-date-time #dt></owl-date-time>
+                    </div>
+                  </label>
+                  <button style="margin-left: 140px;" mat-button
+                    (click)="saveDateandTime(notes.noteId)">save</button>
+              </div>
+              </mat-card>
+            </mat-menu>
+
+       
+    <!-- 3rd mat menu-->
+          <mat-menu #MoreOption2="matMenu">
+            <!-- <button mat-menu-item style="height: 35px;">Delete note</button> -->
+            <button mat-menu-item style="height: 35px;" (click)="onTrash(notes.noteId);">Delete note</button>
+            <button mat-menu-item style="height: 35px;">Add drawing</button>
+            <button mat-menu-item style="height: 35px;" [matMenuTriggerFor]="label">add Label</button>
+            <button mat-menu-item style="height: 35px;">Make a copy</button>
+            <button mat-menu-item style="height: 35px;">Show Checkboxes</button>
+          </mat-menu>
+
+     <!-- 4th mat menu-->
+          <mat-menu #label="matMenu">
+            <mat-card (click)=$event.stopPropagation()>
+                    <h5 style="margin-bottom: 5px">Label note</h5>
+                    <input style="border: none;height: 31px;" placeholder="enter label name" type="text"
+                                [(ngModel)]="labelTitle">
+                        <button mat-icon-button >
+                                  <mat-icon  style="font-size: 20px " matTooltip="More" (click) = "addLabelToNote(notes.noteId)">done</mat-icon>
+                        </button>
+                    <div style="margin: 5px" *ngFor = "let lab of labels">
+                        <mat-checkbox (click) = "addLabel(notes.noteId,lab)">{{lab.labelTitle}}</mat-checkbox>
+                    </div>
+            </mat-card> 
           </mat-menu>
 
           <!-- <mat-menu [overlapTrigger]="false" #buttonMenu3="matMenu">
@@ -337,42 +416,35 @@
           </mat-menu> -->
 
           <!--When we click the mat-icon-button, a menu list is show using the  e.g [matMenuTriggerfor] -->
-          <mat-menu #Reminder2="matMenu">
-            <button mat-menu-item style="height: 35px;">Later today 8:00 PM</button>
-            <button mat-menu-item style="height: 35px;">Tomorrow 8:00 PM</button>
-            <button mat-menu-item style="height: 35px;">Next week 8:00 PM</button>
-            <button mat-menu-item style="height: 35px;">Home Address</button>
-            <button mat-menu-item style="height: 35px;">Work Address</button>
-
-            <button mat-menu-item>
-              <mat-form-field class="example-full-width">
-                <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-                <mat-datepicker-toggle matSuffix [for]="picker">
-                  <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-            </button>
-          </mat-menu>
-
-          <mat-menu #MoreOption2="matMenu">
-            <!-- <button mat-menu-item style="height: 35px;">Delete note</button> -->
-            <button mat-menu-item style="height: 35px;" (click)="onTrash(notes.noteId);">Delete note</button>
-            <!-- <button mat-menu-item style="height: 35px;">Add label</button> -->
-            <button mat-menu-item style="height: 35px;">Add drawing</button>
-            <button mat-menu-item style="height: 35px;">Make a copy</button>
-            <button mat-menu-item style="height: 35px;">Show Checkboxes</button>
-          </mat-menu>
+         
         </mat-card>
         <div *ngIf="notes.pinned===true"></div>
       </div>
     </div>
   </div>
 
-
-
-
-  
-
-
 </div>
+
+
+
+
+
+
+<!-- <mat-menu #Reminder2="matMenu">+
+  <button mat-menu-item style="height: 35px;">Later today 8:00 PM</button>
+  <button mat-menu-item style="height: 35px;">Tomorrow 8:00 PM</button>
+  <button mat-menu-item style="height: 35px;">Next week 8:00 PM</button>
+  <button mat-menu-item style="height: 35px;">Home Address</button>
+  <button mat-menu-item style="height: 35px;">Work Address</button>
+
+  <button mat-menu-item>
+    <mat-form-field class="example-full-width">
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </button>
+</mat-menu> -->
+

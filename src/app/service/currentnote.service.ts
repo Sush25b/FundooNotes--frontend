@@ -12,7 +12,8 @@ import { HttpService } from '../service/http.service';
 @Injectable()
 export class CurrentnoteService
  {
-  private messageSource = new BehaviorSubject<any>("default");
+  // private messageSource = new BehaviorSubject<any>("default");
+  private messageSource = new BehaviorSubject<[]>( [] );
   currentnote =this.messageSource.asObservable();
 
   constructor( private http: HttpService) { }
