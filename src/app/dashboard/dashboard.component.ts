@@ -11,7 +11,8 @@ import { SearchService } from 'src/app/service/search.service';
 import { EditlabelComponent } from '../editlabel/editlabel.component';
 import {MatDialog,MatDialogConfig} from '@angular/material';
 import { UserprofileComponent } from 'src/app/userprofile/userprofile.component';
- 
+import { CurrentsearchService } from 'src/app/service/currentsearch.service';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -19,7 +20,7 @@ import { UserprofileComponent } from 'src/app/userprofile/userprofile.component'
 })
 export class DashboardComponent implements OnInit 
 {
-  constructor(private dialog:MatDialog,private searchS:SearchService,private viewservice: ViewserviceService,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
+  constructor(private currentS:CurrentsearchService,private dialog:MatDialog,private searchS:SearchService,private viewservice: ViewserviceService,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar) { }
 
   // data:any;
   userNote:any;
@@ -68,10 +69,18 @@ export class DashboardComponent implements OnInit
     console.log(this.profilePic);
   }
   
-  search()
+  //If using pipe then use these mehod below 
+  // search()
+  // {
+  //   this.searchS.changeMessage(this.searchterm);
+  // }
+
+  onSearchChange(event)
   {
-    this.searchS.changeMessage(this.searchterm);
+    console.log("Event",event);
+    this.currentS.changeMessage(event);
   }
+
   changeView()
   {
           // this grid/list is only use to ==> diplay the button on toolbar

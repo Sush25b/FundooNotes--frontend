@@ -15,6 +15,7 @@ import { AddNoteComponent } from 'src/app/add-note/add-note.component';
 import { CurrentnoteService } from '../service/currentnote.service';
 import { SearchService } from 'src/app/service/search.service';
 import { DatePipe } from '@angular/common';
+import { CurrentsearchService } from 'src/app/service/currentsearch.service';
 
 @Component({
   selector: 'app-dialogbox',
@@ -62,7 +63,7 @@ export class DialogboxComponent implements OnInit {
   // @Input()
   unpinnedNote:[];
 
-  constructor(private searchS:SearchService,private CurrentnoteS: CurrentnoteService,private viewservice: ViewserviceService,private dialog :MatDialog,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar,private datepipe:DatePipe) { }
+  constructor(private currentS:CurrentsearchService,private searchS:SearchService,private CurrentnoteS: CurrentnoteService,private viewservice: ViewserviceService,private dialog :MatDialog,private router: Router, private formBuilder: FormBuilder, private http: HttpService, private snackbar: MatSnackBar,private datepipe:DatePipe) { }
 
   ngOnInit() 
   {
@@ -88,11 +89,19 @@ export class DialogboxComponent implements OnInit {
       }),
 
     //it is for Search pipe
-    this.searchS.searchtext.subscribe(
-      (text)=>{  
-        this.searchterm = text;
-        // console.log(this.searchterm);
+    // this.searchS.searchtext.subscribe(
+    //   (text)=>{  
+    //     this.searchterm = text;
+    //     // console.log(this.searchterm);
 
+    //   }
+    // )
+
+    //it is for Elastic Search 
+    this.currentS.currentsearch.subscribe(
+      (text)=>{ 
+        console.log(text); 
+        this.Note = text;
       }
     )
   }

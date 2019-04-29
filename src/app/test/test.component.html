@@ -2,11 +2,10 @@
   test works!
 </p>
 
-<div>
+<!-- <div>
   <p>wdwdds</p>
     <mat-card *ngIf="f===log">
         Welcome back, friend.
-      
     </mat-card>
 </div>
   
@@ -14,18 +13,37 @@
   <div *ngIf="isLoggedout===flag">
     Please friend, login.
   </div>
-
+  <p>@@@@2</p> -->
+<!-- ******************************************************************** -->
+<div>
 <ng-container
   *ngIf="f===log; then loggedIn; else loggedOut">
 </ng-container>
 
-
-  <div #loggedIn >
+<p>8888</p>
+<ng-template #loggedIn>
+  <div>
       pinned
   </div>
-
-<ng-template #loggedOut>
-  <div>
-    unpinned
+  <div *ngIf="a===a">
+      <p>dfddddfdf</p>
   </div>
 </ng-template>
+
+  <p>111</p>
+<ng-template #loggedOut >
+  <div >
+    unpinned
+  </div>
+  <div *ngIf="a===a">
+      <p>dfddddfdf</p>
+  </div>
+</ng-template>
+<!-- ******************************************************************** -->
+
+<div *ngFor="let notes of n">
+    <p>44</p>
+    {{notes}}
+    <textarea matTextareaAutosize [(ngModel)]="notes"></textarea>
+    <textarea matTextareaAutosize >gfdgf</textarea>
+</div>

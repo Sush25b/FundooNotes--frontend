@@ -7,13 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestComponent implements OnInit {
 
-  private f:string="log";
+  private f:string="logt";
   private log:string="log";
+  n:any=[];
   
   constructor() { }
 
   ngOnInit() 
   {
+    var ar=['one', 'two']
+    ar[ar.length] = 'five';
+    console.log( ar ); 
+    this.n=ar;
+    console.log(this.n);
+
+    
 
   }
 

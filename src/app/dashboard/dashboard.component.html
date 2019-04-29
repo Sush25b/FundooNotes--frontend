@@ -33,11 +33,19 @@
             <!-- <textarea style="font-size:100%; text-align:center; color: rgb(49, 100, 177)" [ngModel]="textchange"></textarea> -->
             </div>
             
-            <div class="toolbarspace">
+            <!-- <div class="toolbarspace">
                 <button mat-button  mat-icon-button>
                   <mat-icon>search</mat-icon>
                 </button>
                 <input matInput type="text" class="search-bar" placeholder="Search" [ngClass]="search()" [(ngModel)]="searchterm"> 
+            </div>  -->
+
+            <div class="toolbarspace">
+              <button mat-button  mat-icon-button>
+                <mat-icon>search</mat-icon>
+              </button>
+              <!-- <input matInput type="text" class="search-bar" placeholder="Search" [ngClass]="search()" [(ngModel)]="searchterm">  -->
+              <input matInput class="search-bar" type="input" placeholder="Search" (input)="onSearchChange($event.target.value)" autocomplete="off">
             </div> 
 
             <div class="toolbarspace">
